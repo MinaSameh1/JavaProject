@@ -1,6 +1,5 @@
 package sample;
 
-import javax.xml.transform.Result;
 import java.util.ArrayList;
 
 import java.sql.Connection;
@@ -46,7 +45,9 @@ public class SQLHelper{
 	return 0;
 	}
 
+	// Close the connection and everything
 	public void die(){
+		// Ofc make sure the have something in them, if they are null and you attempt to close it will cause error
 		try {
 		if ( resultSet != null ){
 			resultSet.close();
@@ -81,6 +82,18 @@ public class SQLHelper{
 		}
 	}
 
+	public ResultSet findByUserName(int ID) throws SQLException{
+		try{
+			dbSchema t = new dbSchema();
+			return statement.executeQuery(
+					"SELECT * FROM " + dbSchema.TABLE1_NAME +
+							" WHERE " + t.Tab1.get(0)+ "= " + ID
+			);
+		} catch(SQLException e){
+			throw e;
+		}
+	}
+
 	// This is only for testing purposes
 	public void testSql() throws SQLException {
 		ResultSet rs = statement.executeQuery(
@@ -93,6 +106,7 @@ public class SQLHelper{
 		}
 	}
 
+	// this is also for testing techincally speaking
 	public boolean HandleLogin(String name,String pass){
 		dbSchema db = new dbSchema();
 		try {
@@ -188,11 +202,12 @@ public class SQLHelper{
 		}
 	}
 
+	// Recreate the entire tables and everything
 	private static void createTable(Statement stmt) throws SQLException {
 		dbSchema DB = new dbSchema();
 
 		// Note: You cannot drop refrenced Tables, drop first the refrences  
-		// then drop the main table, learned that the hard way! ~Mina
+		// then drop the tables, learned that the hard way! ~Mina
 		// Drop FOREGIN Keys first
 		stmt.execute(
 				"IF EXISTS (SELECT * FROM sys.foreign_keys WHERE " +
@@ -213,7 +228,8 @@ public class SQLHelper{
 				") ALTER TABLE " + dbSchema.TABLE4_NAME + 
 				" DROP CONSTRAINT FK_vPatId"
 				);
-		// Delete Tables if they exists 
+
+		// Delete Tables if they exist
 		stmt.execute( "DROP TABLE IF EXISTS " + dbSchema.TABLE1_NAME );
 		stmt.execute( "DROP TABLE IF EXISTS " + dbSchema.TABLE2_NAME );
 		stmt.execute( "DROP TABLE IF EXISTS " + dbSchema.TABLE3_NAME );
@@ -279,11 +295,12 @@ public class SQLHelper{
 		);
 
 		// Add admin user
-		String Admin = "INSERT INTO " + dbSchema.TABLE1_NAME + " VALUES(" + 
-			       "1,'admin','Admin','Owner','admin','ADMIN@EMAIL.COM',"+
-			       "'1999-05-18' ,20,'01252515125',NULL,"+
-			       "'3in Shams',NULL,'1','M');";
-		stmt.execute(Admin);
+		stmt.execute(
+				"INSERT INTO " + dbSchema.TABLE1_NAME + " VALUES(" +
+						"1,'admin','Admin','Owner','admin','ADMIN@EMAIL.COM',"+
+						"'1999-05-18' ,20,'01252515125',NULL,"+
+						"'3in Shams',NULL,'1','M');"
+		);
 		// Also add admin into workers 
 		stmt.execute(
 				"INSERT INTO " + dbSchema.TABLE2_NAME + " VALUES(" +
@@ -292,6 +309,7 @@ public class SQLHelper{
 	}
 
 
+	// this will help us automate somethings and make everything more modifiable
 	public static class dbSchema{
 	// NOTE : I made the username and password into vars so my team can 
 	// use their SQL. It is not very secure but will work for now.

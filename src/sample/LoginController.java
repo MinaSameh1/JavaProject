@@ -44,6 +44,13 @@ public class LoginController {
 
     public void openRegister(){
         labelWelcome.setText("HELLO!");
+        SQLHelper obj = new SQLHelper();
+        try {
+            obj.Init();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        obj.die();
     }
 
     public void LogClose(){

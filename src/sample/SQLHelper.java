@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.scene.control.TableView;
+
 import java.util.ArrayList;
 
 import java.sql.Connection;
@@ -94,7 +96,7 @@ public class SQLHelper{
 		}
 	}
 
-	// This is only for testing purposes
+	// This is only for login
 	public void testSql() throws SQLException {
 		ResultSet rs = statement.executeQuery(
 				"SELECT * FROM " + dbSchema.TABLE1_NAME
@@ -106,7 +108,33 @@ public class SQLHelper{
 		}
 	}
 
-	// this is also for testing techincally speaking
+	// This is to populate the table view in admin/doctor's page
+	/*
+	 * @parm:
+	 */
+	public TableView getDataBaseData(int temp){
+			dbSchema db = new dbSchema();
+			String SQL = null;
+			switch(temp){
+				case 1:
+						SQL="SELECT * FROM " + dbSchema.TABLE1_NAME;
+						break;
+				case 2:
+						SQL="SELECT * FROM " + dbSchema.TABLE2_NAME;
+						break;
+				case 3:
+						SQL="SELECT * FROM " + dbSchema.TABLE3_NAME;
+						break;
+				case 4:
+						SQL="SELECT * FROM " + dbSchema.TABLE4_NAME;
+						break;
+				default:
+						return null;
+			};
+		System.out.println("TEST " + SQL);
+		return null;
+	}
+	// this is Login in
 	public boolean HandleLogin(String name,String pass){
 		dbSchema db = new dbSchema();
 		try {
@@ -123,9 +151,28 @@ public class SQLHelper{
 		}
 		return false;
 	}
-	// Mostafa Did all of the inserts on his own :D 
+
+	// Mostafa Did all of the inserts on his own :D
+
+	/**
+	 * @param ID 			UserID
+	 * @param USERNAME		the Username of the user
+	 * @param FIRST_NAME	the user's firstname
+	 * @param LAST_NAME		the user's lastname
+	 * @param PASSWORD		the user's password
+	 * @param EMAIL			the user's email
+	 * @param DOB			the user's Date of birth
+	 * @param AGE			the user's Age
+	 * @param TELEPHONE		the user's telephone
+	 * @param ALTPHONE		the user's alt telephone or homephone (Can be null)
+	 * @param ADDRESS		where the user's live (Can be null)
+	 * @param BLOOD_TYPE	the user's blood type (Can be null)
+	 * @param USERTYPE		the user types, 1 for admin, 2 for docotr, 3 for assitant, 4 for cashier and 5 for patient
+	 * @param GENDER		the user's Gender, Char and MUST be either M or F
+	 * @return false if failed and true on success
+	 */
 	// Insert into clinc Users
-	public int InsertIntoUsers(
+	public boolean InsertIntoUsers(
 			int ID, String USERNAME,
 			String FIRST_NAME, String LAST_NAME, String PASSWORD,
 		        String EMAIL, String DOB, int AGE, String TELEPHONE, 
@@ -142,13 +189,20 @@ public class SQLHelper{
 		statement.execute(SQL);
 		} catch( SQLException e ){
 			System.err.println("ERROR! " + e);
-			return -1;
+			return false;
 		}
-		return 0;
+		return true;
 	}
 
+	/**
+	 * @param WORKERID  The worker's UserID
+	 * @param SALARY	The worker's Salary
+	 * @param WORK_TIME	how much the worker must work
+	 * @param NOTES		Notes on the worker
+	 * @return -1 if failed, 0 on success
+	 */
 	// Insert into workers table
-	public int InsertIntoWORKERS(
+	public boolean InsertIntoWORKERS(
 			int WORKERID,
 			double SALARY, String WORK_TIME, String NOTES){
 		String SQL = 
@@ -158,13 +212,21 @@ public class SQLHelper{
 		statement.execute(SQL);
 		} catch( SQLException e ){
 			System.err.println("ERROR! " + e);
-			return -1;
+			return false;
 		}
-		return 0;
+		return true;
 
 	}
+
+	/**
+	 * @param PATIENTSID 		 The patients User ID
+	 * @param NOTES				 Notes on the patient
+	 * @param KONOWN_DISEASES	 The disease the patient has like diabities
+	 * @param PRESCRIPTION		 The prescription the patient is on (The ones the doctor gave to him)
+	 * @return -1 if failed, 0 on success
+	 */
 	// Insert into patients
-	public int InsertIntoPATIENTS(	int PATIENTSID,
+	public boolean InsertIntoPATIENTS(	int PATIENTSID,
 			String NOTES , String KONOWN_DISEASES, String PRESCRIPTION) {
 		String SQL = "INSERT INTO " + dbSchema.TABLE3_NAME + 
 			" VALUES('" + PATIENTSID + "', '" + NOTES 
@@ -173,17 +235,23 @@ public class SQLHelper{
 		statement.execute(SQL);
 		} catch( SQLException e ){
 			System.err.println("ERROR! " + e);
-			return -1;
+			return false;
 		}
-		return 0;
+		return true;
 	}
 
-	public int InsertIntoVISTS( String VISITTYPE , 
-			String EXTRA , String VISIT_TIME,double COST) {
-			String SQL = 
-			"INSERT INTO " + dbSchema.TABLE4_NAME + 
-			" VALUES('" + VISITTYPE + 
-			"', '" + EXTRA + "', '" + VISIT_TIME + 
+	/**
+	 * @param VISITTYPE    The Type of visit, reveal (كشف( , consultation(استشارة) , Others
+	 * @param EXTRA 		Extra things like xray or scan or tests whatever depending on the clinic
+	 * @param VISIT_TIME 	When the visit happened
+	 * @param COST			the cost of the visit
+	 * @return	if failed return -1, on success return 0
+	 */
+	public int InsertIntoVISTS( String VISITTYPE, String EXTRA, String VISIT_TIME, double COST ) {
+			String SQL =
+			"INSERT INTO " + dbSchema.TABLE4_NAME +
+			" VALUES('" + VISITTYPE +
+			"', '" + EXTRA + "', '" + VISIT_TIME +
 			"', '" + COST + "')";
 		try{ 
 		statement.execute(SQL);
@@ -195,15 +263,25 @@ public class SQLHelper{
 	}
 
 	protected void resetDatabase() throws Exception{
-		try{ 
-			SQLHelper.createTable(statement);
-		} catch( SQLException e){
-			throw e;
-		}
+			SQLHelper Helper = new SQLHelper();
+			Helper.Init();
+			// Recreate the database
+			Helper.createTable(Helper.statement);
+			// add admin user
+			Helper.InsertIntoUsers(
+					1,"admin","Admin","Owner","admin","ADMIN@EMAIL.COM",
+							"1999-05-18" ,20,"01252515125","NULL",
+							"3in Shams","NULL",1,'M'
+			);
+			// add admin to workers
+			Helper.InsertIntoWORKERS(
+					1,0,"11:00 am - 8:00 pm", "NULL"
+			);
+
 	}
 
 	// Recreate the entire tables and everything
-	private static void createTable(Statement stmt) throws SQLException {
+	private void createTable(Statement stmt) throws SQLException {
 		dbSchema DB = new dbSchema();
 
 		// Note: You cannot drop refrenced Tables, drop first the refrences  
@@ -293,23 +371,12 @@ public class SQLHelper{
 		        "REFERENCES " + dbSchema.TABLE1_NAME + "(" + DB.Tab1.get(0) +
 			") );" 
 		);
-
-		// Add admin user
-		stmt.execute(
-				"INSERT INTO " + dbSchema.TABLE1_NAME + " VALUES(" +
-						"1,'admin','Admin','Owner','admin','ADMIN@EMAIL.COM',"+
-						"'1999-05-18' ,20,'01252515125',NULL,"+
-						"'3in Shams',NULL,'1','M');"
-		);
-		// Also add admin into workers 
-		stmt.execute(
-				"INSERT INTO " + dbSchema.TABLE2_NAME + " VALUES(" +
-				"1,0,'11:00 am - 8:00 pm', NULL);" 
-			    );
 	}
 
 
-	// this will help us automate somethings and make everything more modifiable
+	/**
+	 * This is done to help automate things and be cleaner, also helps in making things modifiable
+	 */
 	public static class dbSchema{
 	// NOTE : I made the username and password into vars so my team can 
 	// use their SQL. It is not very secure but will work for now.
@@ -335,6 +402,7 @@ public class SQLHelper{
 		public ArrayList<String> Tab4 = new ArrayList<String>();
 
 		public dbSchema(){
+			//Table 1
 			Tab1.add("ID");
 			Tab1.add("USERNAME");
 			Tab1.add("FIRST_NAME");
@@ -349,17 +417,17 @@ public class SQLHelper{
 			Tab1.add("BLOOD_TYPE");
 			Tab1.add("USERTYPE");
 			Tab1.add("GENDER");
-
+			//Table 2
 			Tab2.add("WORKERID");
 			Tab2.add("SALARY");
 			Tab2.add("WORK_TIME");
 			Tab2.add("NOTES");
-
+			//Table 3
 			Tab3.add("PATIENTID");
 			Tab3.add("NOTES");
 			Tab3.add("KNOWN_DISEASES");
 			Tab3.add("PRESCRIPTION");
-
+			//Table 4
 			Tab4.add("VISITID");
 			Tab4.add("PatientID");
 			Tab4.add("PURPOSE");

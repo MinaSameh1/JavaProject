@@ -10,35 +10,54 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="LoginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="800.0" style="-fx-background-color: #24c2f2; -fx-background-image: url(&quot;DocOf.png&quot;); -fx-background-repeat: stretch; -fx-background-position: center;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoginController">
-   <children>
-      <Button fx:id="butLog" alignment="CENTER" defaultButton="true" layoutX="370.0" layoutY="298.0" mnemonicParsing="false" onAction="#handleLog" style="-fx-background-color: #4578a8#4578a8;" text="Log in" textFill="#edcf61">
-         <font>
-            <Font name="Inconsolata Regular" size="14.0" />
-         </font>
-      </Button>
-      <Label layoutX="269.0" layoutY="62.0" text="Clinic Manager">
-         <font>
-            <Font name="Cantarell Regular" size="41.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="82.0" fitWidth="84.0" layoutX="353.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@clisym.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="276.0" layoutY="234.0" text="UserName: " />
-      <TextField fx:id="UserName" layoutX="353.0" layoutY="229.0" promptText="UserName" />
-      <Label layoutX="276.0" layoutY="267.0" text="Password :" />
-      <Label layoutX="322.0" layoutY="334.0" text="New Patient? Click">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <MenuBar prefHeight="29.0" prefWidth="800.0" style="-fx-background-color: #c8c2d8;">
+
+<BorderPane style="-fx-background-color: #24c2f2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoginController">
+   <center>
+      <Pane fx:id="LoginPane" prefHeight="575.0" prefWidth="800.0" style="-fx-background-color: #24c2f2; -fx-background-image: url(&quot;DocOf.png&quot;); -fx-background-repeat: stretch; -fx-background-position: center;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="butLog" alignment="CENTER" defaultButton="true" layoutX="370.0" layoutY="298.0" mnemonicParsing="false" onAction="#handleLog" style="-fx-background-color: #4578a8#4578a8;" text="Log in" textFill="#edcf61">
+               <font>
+                  <Font name="Inconsolata Regular" size="14.0" />
+               </font>
+            </Button>
+            <Label layoutX="269.0" layoutY="62.0" text="Clinic Manager">
+               <font>
+                  <Font name="Cantarell Regular" size="41.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="82.0" fitWidth="84.0" layoutX="353.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@clisym.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="276.0" layoutY="234.0" text="UserName: " />
+            <TextField fx:id="UserName" layoutX="353.0" layoutY="229.0" promptText="UserName" />
+            <Label layoutX="276.0" layoutY="267.0" text="Password :" />
+            <Label layoutX="322.0" layoutY="334.0" text="New Patient? Click">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="Password" layoutX="353.0" layoutY="262.0" promptText="Password" />
+            <Label fx:id="labelWelcome" layoutX="264.0" layoutY="366.0" prefHeight="27.0" prefWidth="365.0" textFill="RED">
+               <font>
+                  <Font name="Inconsolata Bold" size="18.0" />
+               </font>
+            </Label>
+            <Hyperlink fx:id="Hyl" layoutX="449.0" layoutY="329.0" onAction="#openRegister" text="here" textFill="#d73232">
+               <font>
+                  <Font name="Monospaced Regular" size="15.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </Pane>
+   </center>
+   <top>
+      <MenuBar prefHeight="29.0" prefWidth="800.0" style="-fx-background-color: #c8c2d8;" BorderPane.alignment="CENTER">
          <menus>
             <Menu mnemonicParsing="false" text="File">
                <items>
@@ -57,15 +76,5 @@
             </Menu>
          </menus>
       </MenuBar>
-      <PasswordField fx:id="Password" layoutX="353.0" layoutY="262.0" promptText="Password" />
-      <Label fx:id="labelWelcome" layoutX="264.0" layoutY="366.0" prefHeight="27.0" prefWidth="365.0" textFill="RED">
-         <font>
-            <Font name="Inconsolata Bold" size="18.0" />
-         </font></Label>
-      <Hyperlink fx:id="Hyl" layoutX="449.0" layoutY="329.0" onAction="#openRegister" text="here" textFill="#d73232">
-         <font>
-            <Font name="Monospaced Regular" size="15.0" />
-         </font>
-      </Hyperlink>
-   </children>
-</Pane>
+   </top>
+</BorderPane>

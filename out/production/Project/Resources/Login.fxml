@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane style="-fx-background-color: #24c2f2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoginController">
    <center>
       <Pane fx:id="LoginPane" prefHeight="575.0" prefWidth="800.0" style="-fx-background-color: #24c2f2; -fx-background-image: url(&quot;DocOf.png&quot;); -fx-background-repeat: stretch; -fx-background-position: center;" BorderPane.alignment="CENTER">
@@ -31,7 +30,7 @@
             </Label>
             <ImageView fitHeight="82.0" fitWidth="84.0" layoutX="353.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@clisym.png" />
+                  <Image url="@Pics/clisym.png" />
                </image>
             </ImageView>
             <Label layoutX="276.0" layoutY="234.0" text="UserName: " />
@@ -43,7 +42,7 @@
                </font>
             </Label>
             <PasswordField fx:id="Password" layoutX="353.0" layoutY="262.0" promptText="Password" />
-            <Label fx:id="labelWelcome" layoutX="264.0" layoutY="366.0" prefHeight="27.0" prefWidth="365.0" textFill="RED">
+            <Label fx:id="labelWelcome" layoutX="290.0" layoutY="356.0" prefHeight="205.0" prefWidth="488.0" textFill="RED">
                <font>
                   <Font name="Inconsolata Bold" size="18.0" />
                </font>

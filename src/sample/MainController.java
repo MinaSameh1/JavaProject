@@ -7,6 +7,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 
-public class Controller {
+public class MainController {
 
 }

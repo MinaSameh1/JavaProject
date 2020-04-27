@@ -1,6 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" />
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="645.0" prefWidth="960.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox prefHeight="616.0" prefWidth="208.0" style="-fx-background-color: #00a5e0;" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="90.0" prefWidth="208.0">
+               <children>
+                  <ImageView fitHeight="72.0" fitWidth="90.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Pics/clisym.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="104.0" layoutY="25.0" text="Clinic">
+                     <font>
+                        <Font name="FontAwesome" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="104.0" layoutY="46.0" text="Manager">
+                     <font>
+                        <Font name="FontAwesome" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Button graphicTextGap="6.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Users" textAlignment="CENTER" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Pics/Pat.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Inconsolata Regular" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </Button>
+            <Button graphicTextGap="6.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Doctors and Workers" textAlignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Pics/DocSymb.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+               <font>
+                  <Font name="Inconsolata Regular" size="16.0" />
+               </font>
+            </Button>
+            <Button graphicTextGap="6.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Patients" textAlignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Pics/Pat2.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Inconsolata Regular" size="16.0" />
+               </font>
+            </Button>
+            <Button graphicTextGap="6.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Visits" textAlignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Pics/Visit.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Inconsolata Regular" size="16.0" />
+               </font>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+</BorderPane>

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="645.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="645.0" prefWidth="960.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <left>
       <VBox prefHeight="616.0" prefWidth="208.0" style="-fx-background-color: #00a5e0;" BorderPane.alignment="CENTER">
          <children>
@@ -33,7 +33,7 @@
                   </Label>
                </children>
             </Pane>
-            <Button graphicTextGap="6.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Users" textAlignment="CENTER" textFill="WHITE">
+            <Button graphicTextGap="6.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Users" textAlignment="CENTER" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -51,7 +51,7 @@
                   <Insets left="5.0" />
                </padding>
             </Button>
-            <Button graphicTextGap="6.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Doctors and Workers" textAlignment="CENTER">
+            <Button graphicTextGap="6.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Doctors and Workers" textAlignment="CENTER">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -66,7 +66,7 @@
                   <Font name="Inconsolata Regular" size="16.0" />
                </font>
             </Button>
-            <Button graphicTextGap="6.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Patients" textAlignment="CENTER">
+            <Button graphicTextGap="6.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Patients" textAlignment="CENTER">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -78,7 +78,7 @@
                   <Font name="Inconsolata Regular" size="16.0" />
                </font>
             </Button>
-            <Button graphicTextGap="6.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Visits" textAlignment="CENTER">
+            <Button graphicTextGap="6.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Visits" textAlignment="CENTER">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>

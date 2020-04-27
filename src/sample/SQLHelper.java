@@ -96,7 +96,7 @@ public class SQLHelper{
 		}
 	}
 
-	// This is only for login
+	// This is only for testing
 	public void testSql() throws SQLException {
 		ResultSet rs = statement.executeQuery(
 				"SELECT * FROM " + dbSchema.TABLE1_NAME
@@ -175,16 +175,30 @@ public class SQLHelper{
 	public boolean InsertIntoUsers(
 			int ID, String USERNAME,
 			String FIRST_NAME, String LAST_NAME, String PASSWORD,
-		        String EMAIL, String DOB, int AGE, String TELEPHONE, 
+		        String EMAIL, String DOB, int AGE, String TELEPHONE,
 		        String ALTPHONE, String ADDRESS, String BLOOD_TYPE,
 		        int USERTYPE, char GENDER ) {
-		String SQL = 
+
+		// if the values aren't NULL put them between ' '
+		if(TELEPHONE.compareTo("NULL") != 0){
+			TELEPHONE = "'" + TELEPHONE + "'";
+ 		}
+		if(ALTPHONE.compareTo("NULL") != 0){
+			ALTPHONE = "'" + ALTPHONE + "'";
+		}
+		if(ADDRESS.compareTo("NULL") != 0){
+			ADDRESS = "'" + ADDRESS + "'";
+		}
+		if(BLOOD_TYPE.compareTo("NULL") != 0){
+			BLOOD_TYPE = "'" + BLOOD_TYPE + "'";
+		}
+		String SQL =
 			"INSERT INTO " + dbSchema.TABLE1_NAME + " VALUES('" + ID + 
 			"', '" + USERNAME + "', '" + FIRST_NAME + "', '" + LAST_NAME + 
 			"','"  + PASSWORD + "'  ,'" + EMAIL+  
-			"' ,'" + DOB + "','" + AGE + "','" + TELEPHONE + 
-			"' ,'" + ALTPHONE +"','" + ADDRESS + "','" + 
-			BLOOD_TYPE + "','" + USERTYPE + "','" + GENDER + "' )";
+			"' ,'" + DOB + "','" + AGE + "'," + TELEPHONE +
+			" ," + ALTPHONE +"," + ADDRESS + "," +
+			BLOOD_TYPE + ",'" + USERTYPE + "','" + GENDER + "' )";
 		try{ 
 		statement.execute(SQL);
 		} catch( SQLException e ){
@@ -203,8 +217,12 @@ public class SQLHelper{
 	 */
 	// Insert into workers table
 	public boolean InsertIntoWORKERS(
-			int WORKERID,
-			double SALARY, String WORK_TIME, String NOTES){
+			int WORKERID, double SALARY, String WORK_TIME, String NOTES
+	) {
+		// If the values aren't null add ' ' to them
+		if(NOTES.compareTo("NULL") != 0){
+			NOTES = "'" + NOTES + "'";
+		}
 		String SQL = 
 			"INSERT INTO " + dbSchema.TABLE2_NAME + " VALUES('" + WORKERID + 
 			"', '" + SALARY + "', '" + WORK_TIME + "', '" + NOTES + "')";
@@ -226,12 +244,13 @@ public class SQLHelper{
 	 * @return -1 if failed, 0 on success
 	 */
 	// Insert into patients
-	public boolean InsertIntoPATIENTS(	int PATIENTSID,
-			String NOTES , String KONOWN_DISEASES, String PRESCRIPTION) {
+	public boolean InsertIntoPATIENTS (
+			int PATIENTSID, String NOTES , String KONOWN_DISEASES, String PRESCRIPTION
+	) {
 		String SQL = "INSERT INTO " + dbSchema.TABLE3_NAME + 
 			" VALUES('" + PATIENTSID + "', '" + NOTES 
 			+ "', '" + KONOWN_DISEASES + "', '" + PRESCRIPTION + "')";
-		try{ 
+		try{
 		statement.execute(SQL);
 		} catch( SQLException e ){
 			System.err.println("ERROR! " + e);
@@ -240,19 +259,11 @@ public class SQLHelper{
 		return true;
 	}
 
-	/**
-	 * @param VISITTYPE    The Type of visit, reveal (كشف( , consultation(استشارة) , Others
-	 * @param EXTRA 		Extra things like xray or scan or tests whatever depending on the clinic
-	 * @param VISIT_TIME 	When the visit happened
-	 * @param COST			the cost of the visit
-	 * @return	if failed return -1, on success return 0
-	 */
-	public int InsertIntoVISTS( String VISITTYPE, String EXTRA, String VISIT_TIME, double COST ) {
+	public int InsertIntoVISTS( int VISITID, int PatientID,String PURPOSE,String VISITTYPE, String VISIT_TIME, String EXTRA, double COST ) {
 			String SQL =
 			"INSERT INTO " + dbSchema.TABLE4_NAME +
-			" VALUES('" + VISITTYPE +
-			"', '" + EXTRA + "', '" + VISIT_TIME +
-			"', '" + COST + "')";
+		" VALUES(" + VISITID + ", " + PatientID + ", '" + PURPOSE + "', '" + VISITTYPE + "', '" +
+					VISIT_TIME + "', '" + EXTRA + "', '" + COST + "')";
 		try{ 
 		statement.execute(SQL);
 		} catch( SQLException e ){
@@ -271,7 +282,7 @@ public class SQLHelper{
 			Helper.InsertIntoUsers(
 					1,"admin","Admin","Owner","admin","ADMIN@EMAIL.COM",
 							"1999-05-18" ,20,"01252515125","NULL",
-							"3in Shams","NULL",1,'M'
+							"3in Shams","NULL",0,'M'
 			);
 			// add admin to workers
 			Helper.InsertIntoWORKERS(
@@ -349,8 +360,8 @@ public class SQLHelper{
 		stmt.execute(
 			"CREATE TABLE " + dbSchema.TABLE3_NAME +" ( " + 
 			DB.Tab3.get(0) + " INT 	NOT NULL," + 
-			DB.Tab3.get(1) + " VARCHAR(20),"   + 
-			DB.Tab3.get(2) + " VARCHAR(20),"   + 
+			DB.Tab3.get(1) + " VARCHAR(20) NULL,"   +
+			DB.Tab3.get(2) + " VARCHAR(20) NULL,"   +
 			"CONSTRAINT PatientId PRIMARY KEY(" + DB.Tab3.get(0) + ")," +
 			"CONSTRAINT FK_PatientID FOREIGN KEY (" + DB.Tab3.get(0) + 
 			") REFERENCES " + dbSchema.TABLE1_NAME  +
@@ -415,6 +426,7 @@ public class SQLHelper{
 			Tab1.add("ALTPHONE");
 			Tab1.add("ADDRESS");
 			Tab1.add("BLOOD_TYPE");
+			//  0 for admin, 1 for doctor, 2 for doctor assistant, 3 for cashier, 4 for patients
 			Tab1.add("USERTYPE");
 			Tab1.add("GENDER");
 			//Table 2

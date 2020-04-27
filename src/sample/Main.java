@@ -16,7 +16,7 @@ public class Main extends Application {
         VBox root = new VBox();
         Pane pane = FXMLLoader.load(getClass().getResource("../Resources/Login.fxml"));
         root.getChildren().add(pane);
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Clinic Manager Login");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 

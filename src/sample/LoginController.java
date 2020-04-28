@@ -2,12 +2,21 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import javax.print.attribute.standard.JobOriginatingUserName;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 
 public class LoginController {
@@ -18,7 +27,7 @@ public class LoginController {
     @FXML
     private PasswordField Password;
     @FXML
-    private Label labelWelcome;
+    public Label labelWelcome;
     @FXML
     private MenuItem LogMenuClose;
     private Stage stage;
@@ -33,7 +42,7 @@ public class LoginController {
             helper.Init();
             if(helper.HandleLogin(UserName.getText(),Password.getText())){
                 System.out.println("WELCOME " + UserName.getText());
-                labelWelcome.setText("WELCOME USER:" + UserName.getText());
+                labelWelcome.setText("WELCOME USER:" + UserName.getText() );
             }
             else {
                 System.out.println("FAILED");
@@ -48,17 +57,12 @@ public class LoginController {
     }
 
     public void openRegister(){
+
         SQLHelper obj = new SQLHelper();
+
         try {
-
-            // Note: Mostafa did the Register Form, he did a great job especially with choosing the picture
-            BorderPane pane = FXMLLoader.load(getClass().getResource("../Resources/Register.fxml"));
-            Stage Reg = new Stage();
-            Reg.setTitle("Hello World");
-            Reg.setScene(new Scene(pane));
-            Reg.show();
-            labelWelcome.getScene().getWindow().hide();
-
+            Main.MainProgram.startReg();
+            Main.MainProgram.hideLogin();
         } catch (Exception e) {
             e.printStackTrace();
             labelWelcome.setText(e.getMessage());
@@ -67,7 +71,13 @@ public class LoginController {
     }
 
     public void LogClose(){
-        Stage stage = (Stage) UserName.getScene().getWindow();
-        stage.close();
+        Main.MainProgram.closeLogin();
     }
+
+    public void openAbout(){
+        Main.MainProgram.showAbout();
+    }
+
+
+
 }

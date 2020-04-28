@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 
 import java.util.ArrayList;
@@ -134,6 +135,7 @@ public class SQLHelper{
 		System.out.println("TEST " + SQL);
 		return null;
 	}
+
 	// this is Login in
 	public boolean HandleLogin(String name,String pass){
 		dbSchema db = new dbSchema();
@@ -146,6 +148,7 @@ public class SQLHelper{
 			if(name.equals(rs.getString("USERNAME")) && pass.equals(rs.getString("PASSWORD") ))
 				return true;
 		} catch (SQLException e) {
+			new Alert(Alert.AlertType.ERROR, "ERROR in connection" + e.getMessage()).showAndWait();
 			e.printStackTrace();
 			System.err.println("FAILED");
 		}
@@ -328,7 +331,7 @@ public class SQLHelper{
 		stmt.execute(
 			"CREATE TABLE " + dbSchema.TABLE1_NAME + "("       + 
 			DB.Tab1.get(0)	+ 	" INT		NOT NULL," +
-			DB.Tab1.get(1)  + 	" VARCHAR(25)	NOT NULL," +
+			DB.Tab1.get(1)  + 	" CHAR(17)	NOT NULL," +
 			DB.Tab1.get(2)  + 	" VARCHAR(25)	NOT NULL," +
 			DB.Tab1.get(3)  + 	" VARCHAR(25)	NOT NULL," +
 			DB.Tab1.get(4)  +       " VARCHAR(25)	NOT NULL," +

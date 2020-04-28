@@ -1,22 +1,8 @@
 package sample;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import javax.print.attribute.standard.JobOriginatingUserName;
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 
 public class LoginController {
@@ -45,7 +31,7 @@ public class LoginController {
                 labelWelcome.setText("WELCOME USER:" + UserName.getText() );
             }
             else {
-                System.out.println("FAILED");
+                System.out.println("FAILED WRONG PASS OR NAME" + UserName.getText() + "  " + Password.getText() );
                 labelWelcome.setText("Wrong Username or password!");
             }
         } catch (Exception e){
@@ -56,10 +42,8 @@ public class LoginController {
         }
     }
 
+    // Open Register
     public void openRegister(){
-
-        SQLHelper obj = new SQLHelper();
-
         try {
             Main.MainProgram.startReg();
             Main.MainProgram.hideLogin();
@@ -67,13 +51,14 @@ public class LoginController {
             e.printStackTrace();
             labelWelcome.setText(e.getMessage());
         }
-        obj.die();
     }
 
+    // Close login
     public void LogClose(){
         Main.MainProgram.closeLogin();
     }
 
+    // open about menu
     public void openAbout(){
         Main.MainProgram.showAbout();
     }

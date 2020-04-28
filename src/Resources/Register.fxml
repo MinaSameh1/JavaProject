@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
@@ -11,142 +12,163 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RegisterController">
+<BorderPane prefHeight="603.0" prefWidth="848.0" style="-fx-background-color: #289AF9;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RegisterController">
    <center>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="593.0">
          <children>
-            <TextField fx:id="FirstNameText" layoutX="30.0" layoutY="89.0" prefHeight="25.0" prefWidth="208.0" promptText="FRIST NAME " />
-            <TextField fx:id="UserNameTest" layoutX="30.0" layoutY="146.0" prefHeight="25.0" prefWidth="208.0" promptText="USER NAME " />
-            <TextField fx:id="EmailText" layoutX="30.0" layoutY="301.0" prefHeight="25.0" prefWidth="208.0" promptText="EMAIL" />
-            <TextField fx:id="TelephoneText" layoutX="30.0" layoutY="351.0" prefHeight="25.0" prefWidth="208.0" promptText="TELEPHONE" />
-            <TextField fx:id="LastNameText" layoutX="310.0" layoutY="89.0" prefHeight="25.0" prefWidth="208.0" promptText="LAST NAME" />
-            <TextField fx:id="AddressText" layoutX="310.0" layoutY="196.0" prefHeight="25.0" prefWidth="208.0" promptText="ADDRESS" />
+            <TextField fx:id="FirstNameText" layoutX="30.0" layoutY="80.0" prefHeight="25.0" prefWidth="208.0" promptText="FRIST NAME " />
+            <TextField fx:id="LastNameText" layoutX="310.0" layoutY="80.0" prefHeight="25.0" prefWidth="208.0" promptText="LAST NAME" />
+            <TextField fx:id="UserNameText" layoutX="30.0" layoutY="137.0" prefHeight="25.0" prefWidth="208.0" promptText="USER NAME " />
+            <PasswordField fx:id="PasswordText" layoutX="30.0" layoutY="185.0" prefHeight="25.0" prefWidth="208.0" promptText="PASSWORD" />
+            <PasswordField fx:id="ConfirmPassText" layoutX="30.0" layoutY="239.0" prefHeight="25.0" prefWidth="208.0" promptText="CONFIRM PASSWORD" />
+            <TextField fx:id="EmailText" layoutX="30.0" layoutY="292.0" prefHeight="25.0" prefWidth="208.0" promptText="EMAIL" />
+            <TextField fx:id="AddressText" layoutX="30.0" layoutY="342.0" prefHeight="25.0" prefWidth="208.0" promptText="ADDRESS" />
+            <TextField fx:id="AgeText" layoutX="310.0" layoutY="126.0" prefHeight="25.0" prefWidth="208.0" promptText="AGE" />
+            <TextField fx:id="TelephoneText" layoutX="310.0" layoutY="174.0" prefHeight="25.0" prefWidth="208.0" promptText="TELEPHONE" />
+            <TextField fx:id="AltPhoneText" layoutX="310.0" layoutY="224.0" prefHeight="26.0" prefWidth="213.0" promptText="ALTERNATE PHONE" />
+            <DatePicker fx:id="DOB" layoutX="313.0" layoutY="276.0" prefHeight="30.0" prefWidth="209.0" />
             <Label layoutX="24.0" layoutY="16.0" text="Register Patient " textFill="#33fff0">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="AgeText" layoutX="310.0" layoutY="146.0" prefHeight="25.0" prefWidth="208.0" promptText="AGE" />
-            <Button fx:id="ResetButton" layoutX="108.0" layoutY="402.0" mnemonicParsing="false" onAction="#ResetReg" prefHeight="30.0" prefWidth="124.0" text="Rest All" />
-            <Button fx:id="ContButton" layoutX="337.0" layoutY="402.0" mnemonicParsing="false" onAction="#ContReg" prefHeight="30.0" prefWidth="136.0" text="continue" />
+            <RadioButton fx:id="Mradio" layoutX="321.0" layoutY="337.0" mnemonicParsing="false" text="Male" textFill="#33fff0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="Gender" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="Fradio" layoutX="403.0" layoutY="334.0" mnemonicParsing="false" text="Female" textFill="#33fff0" toggleGroup="$Gender">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </RadioButton>
+            <ComboBox fx:id="BloodTypeBox" layoutX="409.0" layoutY="386.0" prefWidth="150.0" promptText="Blood Type" />
+            <Button fx:id="ContButton" layoutX="336.0" layoutY="435.0" mnemonicParsing="false" onAction="#ContReg" prefHeight="30.0" prefWidth="136.0" text="continue" />
+            <Button fx:id="ResetButton" layoutX="107.0" layoutY="435.0" mnemonicParsing="false" onAction="#ResetReg" prefHeight="30.0" prefWidth="124.0" text="Rest All" />
             <Separator layoutX="1.0" layoutY="50.0" prefHeight="5.0" prefWidth="554.0" />
-            <Label layoutX="30.0" layoutY="68.0" text="First name" textFill="#33fff0">
+            <Label layoutX="30.0" layoutY="59.0" text="First name" textFill="#33fff0">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="310.0" layoutY="68.0" text="Last name" textFill="#33fff0">
+            <Label layoutX="310.0" layoutY="60.0" text="Last name" textFill="#33fff0">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="30.0" layoutY="124.0" text="Username" textFill="#33fff0">
+            <Label layoutX="30.0" layoutY="115.0" text="Username" textFill="#33fff0">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="30.0" layoutY="173.0" text="Password" textFill="#33fff0">
+            <Label layoutX="30.0" layoutY="164.0" text="Password" textFill="#33fff0">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="32.0" layoutY="229.0" text="Confirm password" textFill="#33fff0">
+            <Label layoutX="32.0" layoutY="215.0" text="Confirm password" textFill="#33fff0">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="310.0" layoutY="124.0" text="Age" textFill="#33fff0">
+            <Label layoutX="310.0" layoutY="104.0" text="Age" textFill="#33fff0">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="310.0" layoutY="176.0" text="Address" textFill="#33fff0">
+            <Label layoutX="30.0" layoutY="322.0" text="Address" textFill="#33fff0">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="35.0" layoutY="280.0" text="Email" textFill="#33fff0">
+            <Label layoutX="35.0" layoutY="271.0" text="Email" textFill="#33fff0">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="32.0" layoutY="330.0" text="Telephone" textFill="#33fff0">
+            <Label layoutX="311.0" layoutY="153.0" text="Telephone" textFill="#33fff0">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <DatePicker fx:id="DOB" layoutX="313.0" layoutY="251.0" prefHeight="30.0" prefWidth="217.0" />
-            <Label layoutX="313.0" layoutY="229.0" text="Birthday" textFill="#33fff0">
+            <Label layoutX="313.0" layoutY="254.0" text="Birthday" textFill="#33fff0">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="316.0" layoutY="290.0" text="Gender " textFill="#33fff0">
+            <Label layoutX="316.0" layoutY="313.0" text="Gender " textFill="#33fff0">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <RadioButton fx:id="Mradio" layoutX="316.0" layoutY="316.0" mnemonicParsing="false" text="Male" textFill="#33fff0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </RadioButton>
-            <RadioButton fx:id="Fradio" layoutX="405.0" layoutY="316.0" mnemonicParsing="false" text="Female" textFill="#33fff0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </RadioButton>
-            <PasswordField fx:id="PasswordText" layoutX="30.0" layoutY="194.0" prefHeight="25.0" prefWidth="208.0" promptText="PASSWORD" />
-            <PasswordField fx:id="ConfrimPassText" layoutX="30.0" layoutY="253.0" prefHeight="25.0" prefWidth="208.0" promptText="CONFIRM PASSWORD" />
-            <Label layoutX="120.0" layoutY="67.0" text="*" textFill="RED">
+            <Label layoutX="120.0" layoutY="58.0" text="*" textFill="RED">
                <font>
                   <Font name="DejaVu Sans Condensed Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="113.0" layoutY="120.0" text="*" textFill="RED">
+            <Label layoutX="113.0" layoutY="111.0" text="*" textFill="RED">
                <font>
                   <Font name="DejaVu Sans Condensed Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="111.0" layoutY="169.0" text="*" textFill="RED">
+            <Label layoutX="111.0" layoutY="160.0" text="*" textFill="RED">
                <font>
                   <Font name="DejaVu Sans Condensed Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="181.0" layoutY="224.0" text="*" textFill="RED">
+            <Label layoutX="181.0" layoutY="210.0" text="*" textFill="RED">
                <font>
                   <Font name="DejaVu Sans Condensed Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="395.0" layoutY="65.0" text="*" textFill="RED">
+            <Label layoutX="395.0" layoutY="57.0" text="*" textFill="RED">
                <font>
                   <Font name="DejaVu Sans Condensed Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="341.0" layoutY="119.0" text="*" textFill="RED">
+            <Label layoutX="341.0" layoutY="104.0" text="*" textFill="RED">
                <font>
                   <Font name="DejaVu Sans Condensed Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="387.0" layoutY="223.0" text="*" textFill="RED">
+            <Label layoutX="387.0" layoutY="248.0" text="*" textFill="RED">
                <font>
                   <Font name="DejaVu Sans Condensed Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="376.0" layoutY="286.0" text="*" textFill="RED">
+            <Label layoutX="376.0" layoutY="309.0" text="*" textFill="RED">
                <font>
                   <Font name="DejaVu Sans Condensed Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="343.0" layoutY="437.0" text="* are required fields">
+            <Label layoutX="342.0" layoutY="470.0" text="* are required fields">
                <font>
                   <Font name="Cantarell Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="79.0" layoutY="269.0" text="*" textFill="RED">
+               <font>
+                  <Font name="DejaVu Sans Condensed Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="311.0" layoutY="203.0" text="Alternate Phone" textFill="#33fff0">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="321.0" layoutY="368.0" text="Blood Type" textFill="#33fff0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
          </children>
@@ -160,7 +182,7 @@
       </ImageView>
    </left>
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
+      <MenuBar style="-fx-background-color: #c8c2d8;" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -180,7 +202,7 @@
    <bottom>
       <Pane prefHeight="23.0" prefWidth="819.0" BorderPane.alignment="CENTER">
          <children>
-            <Hyperlink layoutX="566.0" layoutY="-3.0" onAction="#goLogin" text="Click Here to go back to Login Page" />
+            <Hyperlink layoutX="566.0" layoutY="-3.0" onAction="#goLogin" text="Click Here to go back to Login Page" textFill="#0e1dabe2" />
          </children>
       </Pane>
    </bottom>

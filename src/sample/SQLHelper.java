@@ -15,13 +15,6 @@ import java.sql.Statement;
 
 public class SQLHelper{
 
-	// our Connection url, that will be used to connect to the DB
-	private String connectionUrl = 
-		"jdbc:sqlserver://localhost:1433" +
-		";databaseName=" + dbSchema.DB_NAME + 
-		";user=" + dbSchema.USER + 
-		";password=" + dbSchema.PASSWORD + ";";
-
 	private Connection con = null;
 	private Statement statement = null;
 	private PreparedStatement prepStat = null;
@@ -31,26 +24,33 @@ public class SQLHelper{
 	// by mistake 
 	public SQLHelper(){ }
 
+	/**
+	 * @throws Exception if failed to connect warn the user/programmer
+	 */
 	// WAKE UP DATABASE STOP SLEEPING
-	public int Init() throws Exception{
+	public void Init() throws Exception{
 	try {
 		// Make sure we have the driver
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
 		// Connect to the server
-		con = DriverManager.getConnection( connectionUrl );
+		// our Connection url, that will be used to connect to the DB
+		String connectionUrl = "jdbc:sqlserver://localhost:1433" +
+				";databaseName=" + dbSchema.DB_NAME +
+				";user=" + dbSchema.USER +
+				";password=" + dbSchema.PASSWORD + ";";
+		con = DriverManager.getConnection(connectionUrl);
 	
 		statement = con.createStatement();
 	} catch ( Exception e ) {
 		// even my programs throw stuff at me, sad
 		throw e;
 	}
-	return 0;
 	}
 
 	// Close the connection and everything
 	public void die(){
-		// Ofc make sure the have something in them, if they are null and you attempt to close it will cause error
+		// Ofc make sure they have something in them, if they are null and you attempt to close it will cause error
 		try {
 		if ( resultSet != null ){
 			resultSet.close();
@@ -58,6 +58,10 @@ public class SQLHelper{
 
 		if ( statement != null ){
 			statement.close();;
+		}
+
+		if( prepStat != null ){
+			prepStat.close();
 		}
 
 		if ( con != null ){
@@ -148,15 +152,25 @@ public class SQLHelper{
 			if(name.equals(rs.getString("USERNAME")) && pass.equals(rs.getString("PASSWORD") ))
 				return true;
 		} catch (SQLException e) {
-			new Alert(Alert.AlertType.ERROR, "ERROR in connection" + e.getMessage()).showAndWait();
+			new Alert(Alert.AlertType.ERROR, "ERROR in connection " + e.getMessage()).showAndWait();
 			e.printStackTrace();
 			System.err.println("FAILED");
 		}
 		return false;
 	}
 
+	public int CreateID() throws SQLException {
+		Statement stmt = con.createStatement(
+				ResultSet.TYPE_SCROLL_INSENSITIVE,
+				ResultSet.CONCUR_READ_ONLY
+		);
+		ResultSet rs = stmt.executeQuery(
+				"SELECT ID FROM " + dbSchema.TABLE1_NAME
+		);
+		rs.last();
+		return rs.getInt("ID") + 1;
+	}
 	// Mostafa Did all of the inserts on his own :D
-
 	/**
 	 * @param ID 			UserID
 	 * @param USERNAME		the Username of the user
@@ -274,6 +288,17 @@ public class SQLHelper{
 			return -1;
 		}
 		return 0;
+	}
+
+	// these are to get the total number of rows
+	public int getUsersCount() throws SQLException {
+		return statement.executeQuery("SELECT COUNT(*) AS totalRows FROM " + dbSchema.TABLE1_NAME).getInt("totalRows");
+	}
+	public int getWorkersCount() throws SQLException {
+		return statement.executeQuery("SELECT COUNT(*) AS totalRows FROM " + dbSchema.TABLE2_NAME).getInt("totalRows");
+	}
+	public int getPatientsCount() throws SQLException {
+		return statement.executeQuery("SELECT COUNT(*) AS totalRows FROM " + dbSchema.TABLE3_NAME).getInt("totalRows");
 	}
 
 	protected void resetDatabase() throws Exception{

@@ -4,9 +4,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
@@ -46,6 +49,27 @@ public class MainController {
         Login.hide();
     }
 
+    public boolean startLogin(){
+        // Note Nabil did the login page in FX and drew the login page, so credit goes to him on the login page
+        // however we decided to think about it and remade the login page in SceneBuilder instead of writing it in code as it looked better that way.
+        if( Login != null){
+            Main.MainProgram.Login.show();
+            return true;
+        }
+        VBox root = new VBox();
+        Pane pane = null;
+        try {
+            pane = FXMLLoader.load(getClass().getResource("../Resources/Login.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        root.getChildren().add(pane);
+        Login.setTitle("Clinic Manager Login");
+        Login.setScene(new Scene(root));
+        Login.show();
+        return true;
+    }
     public boolean startReg(){
         // if the Stage is already open, show it don't start
         if( Reg != null){

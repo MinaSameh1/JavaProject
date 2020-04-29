@@ -153,20 +153,25 @@ public class RegisterController implements Initializable {
                     }
                 }
             });
+            // TESTING
             new Alert(Alert.AlertType.ERROR, "THIS IS THE DATE!! " + DOB.getValue().toString()).showAndWait();
 
-            // Insert the user data into the tables
+            // Insert the user data into the users and patients
             Helper.InsertIntoUsers(
                     ID , UserNameText.getText() , FirstNameText.getText() , LastNameText.getText() , PasswordText.getText() , EmailText.getText() ,
                     DOB.getValue().toString(),Integer.valueOf(AgeText.getText()),"0" + TelephoneText.getText(), "0" + AltPhoneText.getText(), AddressText.getText(),
                     BloodTypeBox.getValue().toString(),4,Gender
             );
             Helper.InsertIntoPATIENTS(ID,"NULL","NULL","NULL");
+            // SUCCESS TELL THE USER
+            new Alert(Alert.AlertType.CONFIRMATION, "Registration Successful, Will open login page now").showAndWait();
+
+            // Exit Registration form and show the login form
             Main.MainProgram.closeReg();
             Main.MainProgram.showLogin();
-            // if something wrong happens show error
         } catch (Exception e ){
-            new Alert(Alert.AlertType.ERROR, "DB Error! " + e.getMessage()).showAndWait();
+            // if something wrong happens show error
+            new Alert(Alert.AlertType.ERROR, "Error! " + e.getMessage()).showAndWait();
             e.printStackTrace();
         } finally {
             // close connection

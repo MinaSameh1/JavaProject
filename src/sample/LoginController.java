@@ -18,15 +18,25 @@ public class LoginController {
     private MenuItem LogMenuClose;
     private Stage stage;
 
+    // our event to handle button click
     public void handleLog(){
+        // If the text fields are empty tell user
         if(UserName.getText().isEmpty() || Password.getText().isEmpty() ){
             labelWelcome.setText("Please Enter Username and Password!");
             return;
         }
+        // if the values inputed don't make sense tell user
+        if( UserName.getText().length() < 4 || UserName.getText().length() > 16 || Password.getText().length() < 4 || Password.getText().length() > 16 ){
+            labelWelcome.setText("Please check your Username and password!");
+            return;
+        }
+        // our SQL connector basically
         SQLHelper helper = new SQLHelper();
         try {
+            // connect to DB
             helper.Init();
-            if(helper.HandleLogin(UserName.getText(),Password.getText())){
+            // see if username and pass are correct
+            if( helper.HandleLogin(UserName.getText(),Password.getText()) ){
                 System.out.println("WELCOME " + UserName.getText());
                 labelWelcome.setText("WELCOME USER:" + UserName.getText() );
             }
@@ -34,7 +44,7 @@ public class LoginController {
                 System.out.println("FAILED WRONG PASS OR NAME" + UserName.getText() + "  " + Password.getText() );
                 labelWelcome.setText("Wrong Username or password!");
             }
-        } catch (Exception e){
+        } catch ( Exception e ){
             System.out.println("FAILED " + e);
         }
         finally{
@@ -42,7 +52,7 @@ public class LoginController {
         }
     }
 
-    // Open Register
+    // Open Register Stage
     public void openRegister(){
         try {
             Main.MainProgram.startReg();

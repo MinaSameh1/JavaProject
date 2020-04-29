@@ -41,9 +41,9 @@ public class User {
         Gender = new SimpleStringProperty(gender);
     }
 
-    public int getID() {
-        return ID.get();
-    }
+    //Getters and setters
+
+    public int getID() { return ID.get(); }
 
     public void setID(int ID) {
         this.ID.set(ID);
@@ -81,9 +81,7 @@ public class User {
         return LastName.get();
     }
 
-    public void setLastName(String lastName) {
-        this.LastName.set(lastName);
-    }
+    public void setLastName(String lastName) { this.LastName.set(lastName); }
 
     public StringProperty lastNameProperty() {
         return LastName;
@@ -105,9 +103,7 @@ public class User {
         return Age.get();
     }
 
-    public void setAge(int Age) {
-        this.Age.set(Age);
-    }
+    public void setAge(int Age) { this.Age.set(Age); }
 
     public IntegerProperty AgeProperty() {
         return Age;
@@ -125,9 +121,7 @@ public class User {
         return Password;
     }
 
-    public LocalDate getDob() {
-        return Dob.get();
-    }
+    public LocalDate getDob() { return Dob.get(); }
 
     public void setDob(LocalDate Dob) {
         this.Dob.set(Dob);

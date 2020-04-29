@@ -1,8 +1,5 @@
 package sample;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 
 import javafx.fxml.Initializable;
@@ -52,12 +49,23 @@ public class RegisterController implements Initializable {
             }
             return null;
         };
+
+        UnaryOperator<TextFormatter.Change> spaceFilter = change -> {
+            if (change.getText().equals(" ")) {
+                change.setText("");
+            }
+            return change;
+        };
+
         // make telephone,Altphone,Age only numeric
         AgeText.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter));
         TelephoneText.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter));
         AltPhoneText.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter));
 
 
+        // Make password and username no space
+        UserNameText.setTextFormatter(new TextFormatter<String>(spaceFilter));
+        PasswordText.setTextFormatter( new TextFormatter<String>(spaceFilter));
     }
 
     public void ResetReg(){
@@ -86,6 +94,9 @@ public class RegisterController implements Initializable {
 
         // Make sure all fields are correctly filled
         try {
+            // Make sure we don't have any spaces
+            UserNameText.setText(UserNameText.getText().replaceAll("\\s+",""));
+            PasswordText.setText(PasswordText.getText().replaceAll("\\s+",""));
             if (
                     FirstNameText.getText().isEmpty() || LastNameText.getText().isEmpty() || EmailText.getText().isEmpty() ||
                             PasswordText.getText().isEmpty() || ConfirmPassText.getText().isEmpty() || UserNameText.getText().isEmpty() ||

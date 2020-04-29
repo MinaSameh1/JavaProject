@@ -1,8 +1,9 @@
 package sample;
 
 import javafx.scene.control.Alert;
-import javafx.scene.control.TableView;
 
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.ArrayList;
 
 import java.sql.Connection;
@@ -19,7 +20,6 @@ public class SQLHelper{
 	private Statement statement = null;
 	private PreparedStatement prepStat = null;
 	private ResultSet resultSet = null;
-
 	// add constructor so its okay to call it and do nothing in case it got called
 	// by mistake 
 	public SQLHelper(){ }
@@ -75,26 +75,76 @@ public class SQLHelper{
 	public void readDB() throws Exception { }
 
 
+	// Ready the user Class
+	// byID
+	public User getUserPropById(int id) throws SQLException {
+		ResultSet rs = findByID(id);
+		dbSchema db = new dbSchema();
+		rs.next();
+		return new User(
+				rs.getInt(      db.Tab1.get(0)  ),
+				rs.getString(   db.Tab1.get(1)  ),
+				rs.getString(   db.Tab1.get(2)  ),
+				rs.getString(   db.Tab1.get(3)  ),
+				rs.getString(   db.Tab1.get(4)  ),
+				rs.getString(   db.Tab1.get(5)  ),
+				// Convert Date to localDate
+				Instant.ofEpochMilli(rs.getDate( db.Tab1.get(6) ).getTime()).atZone(ZoneId.systemDefault()).toLocalDate(),
+				rs.getInt(      db.Tab1.get(7)  ),
+				rs.getString(   db.Tab1.get(8)  ),
+				rs.getString(   db.Tab1.get(9)  ),
+				rs.getString(   db.Tab1.get(10) ),
+				rs.getString(   db.Tab1.get(11) ),
+				rs.getInt(      db.Tab1.get(12) ),
+				rs.getString(   db.Tab1.get(13) )
+		);
+
+	}
+	// ByName
+	public User getUserPropByName(String username) throws SQLException {
+		ResultSet rs = findByUserName(username);
+		dbSchema db = new dbSchema();
+		rs.next();
+		return new User(
+				rs.getInt(      db.Tab1.get(0)  ),
+				rs.getString(   db.Tab1.get(1)  ),
+				rs.getString(   db.Tab1.get(2)  ),
+				rs.getString(   db.Tab1.get(3)  ),
+				rs.getString(   db.Tab1.get(4)  ),
+				rs.getString(   db.Tab1.get(5)  ),
+				// Convert date to localDate
+				Instant.ofEpochMilli(rs.getDate( db.Tab1.get(6) ).getTime()).atZone(ZoneId.systemDefault()).toLocalDate(),
+				rs.getInt(      db.Tab1.get(7)  ),
+				rs.getString(   db.Tab1.get(8)  ),
+				rs.getString(   db.Tab1.get(9)  ),
+				rs.getString(   db.Tab1.get(10) ),
+				rs.getString(   db.Tab1.get(11) ),
+				rs.getInt(      db.Tab1.get(12) ),
+				rs.getString(   db.Tab1.get(13) )
+		);
+
+	}
+
 	// Note to self: Use execute statement for data manipulation 
 	// like insert, update and delete and executeQuery for data retrieval like select
 	public ResultSet findByUserName(String name) throws SQLException{
 		try{
-			dbSchema t = new dbSchema();
+			dbSchema db = new dbSchema();
 			return statement.executeQuery(
 					"SELECT * FROM " + dbSchema.TABLE1_NAME +
-					" WHERE " + t.Tab1.get(1)+ "= '" + name + "'"
+					" WHERE " + db.Tab1.get(1)+ "= '" + name + "'"
 					);
 		} catch(SQLException e){
 			throw e;
 		}
 	}
 
-	public ResultSet findByUserName(int ID) throws SQLException{
+	public ResultSet findByID(int ID) throws SQLException{
 		try{
-			dbSchema t = new dbSchema();
+			dbSchema db = new dbSchema();
 			return statement.executeQuery(
 					"SELECT * FROM " + dbSchema.TABLE1_NAME +
-							" WHERE " + t.Tab1.get(0)+ "= " + ID
+							" WHERE " + db.Tab1.get(0)+ "= " + ID
 			);
 		} catch(SQLException e){
 			throw e;
@@ -117,7 +167,7 @@ public class SQLHelper{
 	/*
 	 * @parm:
 	 */
-	public TableView getDataBaseData(int temp){
+	/*public TableView getDataBaseData(int temp){
 			dbSchema db = new dbSchema();
 			String SQL = null;
 			switch(temp){
@@ -138,38 +188,45 @@ public class SQLHelper{
 			};
 		System.out.println("TEST " + SQL);
 		return null;
-	}
+	}*/
 
 	// this is Login in
 	public boolean HandleLogin(String name,String pass){
-		dbSchema db = new dbSchema();
 		try {
-			ResultSet rs = statement.executeQuery(
-					"SELECT * FROM " + dbSchema.TABLE1_NAME +
-							" WHERE USERNAME= '" + name + "'"
-			);
-			rs.next();
-			if(name.equals(rs.getString("USERNAME")) && pass.equals(rs.getString("PASSWORD") ))
+			User user = getUserPropByName(name);
+			System.out.println(user.getUserName().toString() + user.getPassword() );
+			System.out.println(name + " " + pass );
+			if( name.equals( user.getUserName().replaceAll("\\s+","") ) && pass.equals( user.getPassword().replaceAll("\\s+","") ) ) {
 				return true;
+			}
 		} catch (SQLException e) {
-			new Alert(Alert.AlertType.ERROR, "ERROR in connection " + e.getMessage()).showAndWait();
+			new Alert(Alert.AlertType.ERROR, "ERROR in " + e.getMessage()).showAndWait();
 			e.printStackTrace();
 			System.err.println("FAILED");
+		} finally {
 		}
 		return false;
 	}
 
 	public int CreateID() throws SQLException {
+		// Make sure we can scroll through the results, will be slower than normal scrolling
 		Statement stmt = con.createStatement(
 				ResultSet.TYPE_SCROLL_INSENSITIVE,
 				ResultSet.CONCUR_READ_ONLY
 		);
+		// get the ID only
 		ResultSet rs = stmt.executeQuery(
 				"SELECT ID FROM " + dbSchema.TABLE1_NAME
 		);
+		// jump to the last one
 		rs.last();
-		return rs.getInt("ID") + 1;
+		// Normally i would do return re.getInt() + 1, but i think its better to close the stmt and rs first
+		int ID = rs.getInt("ID") + 1;
+		stmt.close();
+		rs.close();
+		return ID;
 	}
+
 	// Mostafa Did all of the inserts on his own :D
 	/**
 	 * @param ID 			UserID
@@ -359,8 +416,8 @@ public class SQLHelper{
 			DB.Tab1.get(1)  + 	" CHAR(17)	NOT NULL," +
 			DB.Tab1.get(2)  + 	" VARCHAR(25)	NOT NULL," +
 			DB.Tab1.get(3)  + 	" VARCHAR(25)	NOT NULL," +
-			DB.Tab1.get(4)  +       " VARCHAR(25)	NOT NULL," +
-			DB.Tab1.get(5)  +   	" VARCHAR(20) 	NOT NULL," +
+			DB.Tab1.get(4)  +   " CHAR(17)	NOT NULL," +
+			DB.Tab1.get(5)  +   " VARCHAR(20) 	NOT NULL," +
 			DB.Tab1.get(6)  +	" DATE		NOT NULL," +
 			DB.Tab1.get(7)  + 	" INT		CHECK (AGE >= 0 AND AGE <=105) NOT NULL," +
 			DB.Tab1.get(8)	+	" CHAR(14)	NULL,    " +

@@ -4,7 +4,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -49,15 +48,18 @@ public class MainController {
         Login.hide();
     }
 
+    // Start Login
     public boolean startLogin(){
         // Note Nabil did the login page in FX and drew the login page, so credit goes to him on the login page
         // however we decided to think about it and remade the login page in SceneBuilder instead of writing it in code as it looked better that way.
+
+        // if login is already open show it, don't open a new one!
         if( Login != null){
             Main.MainProgram.Login.show();
             return true;
         }
         VBox root = new VBox();
-        Pane pane = null;
+        BorderPane pane;
         try {
             pane = FXMLLoader.load(getClass().getResource("../Resources/Login.fxml"));
         } catch (IOException e) {
@@ -70,6 +72,7 @@ public class MainController {
         Login.show();
         return true;
     }
+
     public boolean startReg(){
         // if the Stage is already open, show it don't start
         if( Reg != null){
@@ -84,6 +87,8 @@ public class MainController {
             Reg.setScene(new Scene(pane));
             Reg.show();
         } catch ( Exception e){
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "ERROR in " + e.getMessage()).showAndWait();
             return false;
         }
         return true;

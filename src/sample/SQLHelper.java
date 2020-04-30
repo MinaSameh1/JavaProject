@@ -217,6 +217,7 @@ public class SQLHelper{
 	public Visits getVisitsPropPatientID(int ID) throws SQLException {
 		dbSchema db = new dbSchema();
 		ResultSet rs = findVisitsUsingPatientId(ID);
+		rs.next();
 		return new Visits(
 				rs.getInt(	    db.Tab4.get(0) ),
 				rs.getInt(  	db.Tab4.get(1) ),

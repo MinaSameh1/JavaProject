@@ -137,7 +137,7 @@ public class TableViewHelper {
         try {
             List<Visits> list = new ArrayList<>();
             helper.Init();
-            ResultSet rs = helper.findVisitsUsingId(id);
+            ResultSet rs = helper.findVisitsUsingPatientId(id);
             while (rs.next()) {
                 Visits visits = helper.getVisitsPropPatientID(id);
                 list.add(visits);
@@ -157,8 +157,8 @@ public class TableViewHelper {
         try {
             List<Visits> list = new ArrayList<>();
             helper.Init();
-            ResultSet rs = helper.findUserById(id);
-            while (rs.next()) {
+            ResultSet rs = helper.findVisitsUsingPatientId(id);
+            while ( rs.next() ) {
                 Visits visits = helper.getVisitsPropPatientID(id);
                 list.add(visits);
             }

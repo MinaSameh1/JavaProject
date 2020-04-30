@@ -103,12 +103,12 @@
                         <Font name="Inconsolata Regular" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="ageLabel" layoutX="39.0" layoutY="200.0" text="Age">
+                  <Label layoutX="39.0" layoutY="200.0" text="Age">
                      <font>
                         <Font name="Inconsolata Regular" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="dobLabel1" layoutX="134.0" layoutY="200.0" text="age">
+                  <Label fx:id="dobLabel" layoutX="134.0" layoutY="200.0" text="age">
                      <font>
                         <Font name="Inconsolata Regular" size="16.0" />
                      </font>

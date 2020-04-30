@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="922.0" prefWidth="895.0" style="-fx-background-color: dodgerblue;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="42.0" layoutY="110.0" text="First name:" textFill="#f5f4f4">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField layoutX="145.0" layoutY="108.0" />
+      <Label layoutX="373.0" layoutY="111.0" text="Last name:" textFill="#fdfcfc">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField layoutX="478.0" layoutY="108.0" />
+      <Label layoutX="35.0" layoutY="29.0" text="Personal information ">
+         <font>
+            <Font name="Lucida Fax Demibold Italic" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="42.0" layoutY="163.0" text="Address:" textFill="#fdfcfc">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField layoutX="145.0" layoutY="161.0" />
+      <Label layoutX="47.0" layoutY="216.0" text="City:" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField layoutX="145.0" layoutY="213.0" />
+      <Label layoutX="39.0" layoutY="267.0" text="Phone:" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField layoutX="145.0" layoutY="264.0" />
+      <Label layoutX="35.0" layoutY="318.0" text="Gender:" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <ComboBox layoutX="144.0" layoutY="315.0" prefWidth="150.0">
+         <effect>
+            <Reflection />
+         </effect>
+      </ComboBox>
+      <Label layoutX="42.0" layoutY="369.0" text="Age:" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField layoutX="145.0" layoutY="367.0" />
+      <Label layoutX="39.0" layoutY="420.0" text="E-mail:" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField layoutX="145.0" layoutY="417.0" prefHeight="25.0" prefWidth="282.0" />
+      <Label layoutX="41.0" layoutY="762.0" text="Note:" textFill="WHITE">
+         <font>
+            <Font name="Bookshelf Symbol 7" size="18.0" />
+         </font>
+      </Label>
+      <TextArea layoutX="100.0" layoutY="745.0" prefHeight="54.0" prefWidth="388.0" />
+      <Label layoutX="42.0" layoutY="479.0" text="date:" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="373.0" layoutY="268.0" text="Home No.:" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField layoutX="478.0" layoutY="266.0" />
+      <DatePicker layoutX="145.0" layoutY="476.0" />
+      <Label layoutX="34.0" layoutY="554.0" text="Have you previously attended our clinic?" textFill="#fdfafa">
+         <font>
+            <Font name="Bookshelf Symbol 7" size="18.0" />
+         </font>
+      </Label>
+      <RadioButton layoutX="43.0" layoutY="597.0" mnemonicParsing="false" text="Yes" textFill="#f5f2f2" />
+      <RadioButton layoutX="176.0" layoutY="597.0" mnemonicParsing="false" text="No" textFill="WHITE" />
+      <Label layoutX="37.0" layoutY="625.0" text="If Yes,state on which condition and when?" textFill="#faf9f9">
+         <font>
+            <Font name="Bookshelf Symbol 7" size="18.0" />
+         </font>
+      </Label>
+      <TextField layoutX="37.0" layoutY="662.0" prefHeight="54.0" prefWidth="337.0" />
+      <ImageView fitHeight="114.0" fitWidth="142.0" layoutX="733.0" layoutY="632.0" pickOnBounds="true">
+         <image>
+            <Image url="@th.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="87.0" fitWidth="328.0" layoutX="560.0" layoutY="8.0" pickOnBounds="true">
+         <image>
+            <Image url="@th%20(3).jpg" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

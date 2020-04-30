@@ -49,7 +49,7 @@ public class User {
         this.ID.set(ID);
     }
 
-    public IntegerProperty getIdProperty() {
+    public IntegerProperty IdProperty() {
         return ID;
     }
 
@@ -61,7 +61,7 @@ public class User {
         this.UserName.set(UserName);
     }
 
-    public StringProperty getUserNameProperty() {
+    public StringProperty UserNameProperty() {
         return UserName;
     }
 
@@ -73,7 +73,7 @@ public class User {
         this.FirstName.set(firstName);
     }
 
-    public StringProperty getFirstNameProperty() {
+    public StringProperty FirstNameProperty() {
         return FirstName;
     }
 
@@ -83,7 +83,7 @@ public class User {
 
     public void setLastName(String lastName) { this.LastName.set(lastName); }
 
-    public StringProperty getLastNameProperty() {
+    public StringProperty LastNameProperty() {
         return LastName;
     }
 
@@ -95,7 +95,7 @@ public class User {
         this.Address.set(Address);
     }
 
-    public StringProperty getAddressProperty() {
+    public StringProperty AddressProperty() {
         return Address;
     }
 
@@ -105,7 +105,7 @@ public class User {
 
     public void setAge(int Age) { this.Age.set(Age); }
 
-    public IntegerProperty getAgeProperty() {
+    public IntegerProperty AgeProperty() {
         return Age;
     }
 
@@ -117,7 +117,7 @@ public class User {
         this.Password.set(Password);
     }
 
-    public StringProperty getPasswordProperty() {
+    public StringProperty PasswordProperty() {
         return Password;
     }
 
@@ -127,7 +127,7 @@ public class User {
         this.Dob.set(Dob);
     }
 
-    public ObjectProperty<LocalDate> getDobProperty() {
+    public ObjectProperty<LocalDate> DobProperty() {
         return Dob;
     }
 
@@ -139,7 +139,7 @@ public class User {
         this.Email.set(Email);
     }
 
-    public StringProperty getEmailProperty() {
+    public StringProperty EmailProperty() {
         return Email;
     }
     
@@ -151,7 +151,7 @@ public class User {
         this.Telephone.set(Telephone);
     }
 
-    public StringProperty getTelephoneProperty() {
+    public StringProperty TelephoneProperty() {
         return Telephone;
     }
 
@@ -163,7 +163,7 @@ public class User {
         this.AltTelephone.set(AltTelephone);
     }
 
-    public StringProperty getAltTelephoneProperty() {
+    public StringProperty AltTelephoneProperty() {
         return AltTelephone;
     }
 
@@ -175,7 +175,7 @@ public class User {
         this.BloodType.set(BloodType);
     }
 
-    public StringProperty getBloodTypeProperty() {
+    public StringProperty BloodTypeProperty() {
         return BloodType;
     }
 
@@ -187,7 +187,7 @@ public class User {
         this.UserType.set(UserType);
     }
 
-    public IntegerProperty getUserTypeProperty() {
+    public IntegerProperty UserTypeProperty() {
         return UserType;
     }
 
@@ -199,7 +199,7 @@ public class User {
         this.Gender.set(Gender);
     }
 
-    public StringProperty getGenderProperty() {
+    public StringProperty GenderProperty() {
         return Gender;
     }
 

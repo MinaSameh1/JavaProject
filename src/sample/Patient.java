@@ -9,12 +9,19 @@ public class Patient {
     
     private final IntegerProperty Id;
     private final StringProperty KnownDiseases;
+    private final StringProperty Notes;
     private final StringProperty Prescription;
+    private final StringProperty Question;
+    private final StringProperty Complains;
 
-    public Patient(int id, String knownDiseases, String prescription) {
-        Id = new SimpleIntegerProperty(id);
-        KnownDiseases = new SimpleStringProperty(knownDiseases);
-        Prescription = new SimpleStringProperty(prescription);
+    // Constructor for patient
+    public Patient(int id, String knownDiseases, String prescription, String Complains, String Question, String Notes) {
+        this.Id = new SimpleIntegerProperty(id);
+        this.KnownDiseases  = new SimpleStringProperty( knownDiseases   );
+        this.Prescription   = new SimpleStringProperty( prescription)   ;
+        this.Complains      = new SimpleStringProperty( Complains       );
+        this.Question       = new SimpleStringProperty( Question        );
+        this.Notes          = new SimpleStringProperty( Notes         );
     }
 
     public String getKnownDiseases() {
@@ -51,4 +58,40 @@ public class Patient {
     public IntegerProperty IdProperty() {
         return Id;
     }
+
+    public String getQuestion() {
+        return Question.get();
+    }
+
+    public StringProperty questionProperty() {
+        return Question;
+    }
+
+    public void setQuestion(String question) {
+        this.Question.set(question);
+    }
+
+    public String getComplains() {
+        return Complains.get();
+    }
+
+    public StringProperty complainsProperty() {
+        return Complains;
+    }
+
+    public void setComplains(String complains) {
+        this.Complains.set(complains);
+    }
+    public String getNotes() {
+        return Notes.get();
+    }
+
+    public StringProperty notesProperty() {
+        return Notes;
+    }
+
+    public void setNotes(String notes) {
+        this.Notes.set(notes);
+    }
+
 }

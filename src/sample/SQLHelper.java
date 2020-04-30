@@ -1,6 +1,5 @@
 package sample;
 
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 
 import java.time.Instant;
@@ -13,8 +12,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
-
 
 public class SQLHelper{
 
@@ -80,7 +77,7 @@ public class SQLHelper{
 	//// Ready the user Class
 	// byID
 	public User getUserPropById(int id) throws SQLException {
-		ResultSet rs = findByID(id);
+		ResultSet rs = findUserById(id);
 		dbSchema db = new dbSchema();
 		rs.next();
 		return new User(
@@ -148,6 +145,92 @@ public class SQLHelper{
 
 	}
 
+	public Patient getPatientProp(ResultSet rs) throws SQLException {
+		dbSchema db = new dbSchema();
+		return new Patient(
+				rs.getInt(	    db.Tab3.get(0) ),
+				rs.getString(	db.Tab3.get(1) ),
+				rs.getString(   db.Tab3.get(2) ),
+				rs.getString(	db.Tab3.get(3) ),
+				rs.getString(	db.Tab3.get(4) ),
+				rs.getString(   db.Tab3.get(5) )
+		);
+	}
+
+	public Patient getPatientPropId(int ID) throws SQLException {
+		dbSchema db = new dbSchema();
+		ResultSet rs = findPatientById(ID);
+		return new Patient(
+				rs.getInt(	    db.Tab3.get(0) ),
+				rs.getString(	db.Tab3.get(1) ),
+				rs.getString(   db.Tab3.get(2) ),
+				rs.getString(	db.Tab3.get(3) ),
+				rs.getString(	db.Tab3.get(4) ),
+				rs.getString(   db.Tab3.get(5) )
+		);
+	}
+
+	public Worker getWorkerProp(ResultSet rs) throws SQLException {
+		dbSchema db = new dbSchema();
+		return new Worker(
+				rs.getInt(	    db.Tab2.get(0) ),
+				rs.getDouble(	db.Tab2.get(1) ),
+				rs.getString(   db.Tab2.get(2) ),
+				rs.getString(	db.Tab2.get(3) )
+		);
+	}
+
+	public Worker getWorkerPropId(int ID) throws SQLException {
+		dbSchema db = new dbSchema();
+		ResultSet rs = findWorkerById(ID);
+		return new Worker(
+				rs.getInt(	    db.Tab2.get(0) ),
+				rs.getDouble(	db.Tab2.get(1) ),
+				rs.getString(   db.Tab2.get(2) ),
+				rs.getString(	db.Tab2.get(3) )
+		);
+	}
+
+	public Vists getVisitsProp(ResultSet rs) throws SQLException {
+		dbSchema db = new dbSchema();
+		return new Vists(
+				rs.getInt(	    db.Tab2.get(0) ),
+				rs.getInt(  	db.Tab2.get(1) ),
+				rs.getString(   db.Tab2.get(2) ),
+				rs.getString(	db.Tab2.get(3) ),
+				rs.getString(	db.Tab2.get(4) ),
+				rs.getString(	db.Tab2.get(5) ),
+				rs.getDouble(	db.Tab2.get(6) )
+		);
+	}
+
+	public Vists getVisitsPropVisitID(int ID) throws SQLException {
+		dbSchema db = new dbSchema();
+		ResultSet rs = findVisitsUsingId(ID);
+		return new Vists(
+				rs.getInt(	    db.Tab2.get(0) ),
+				rs.getInt(  	db.Tab2.get(1) ),
+				rs.getString(   db.Tab2.get(2) ),
+				rs.getString(	db.Tab2.get(3) ),
+				rs.getString(	db.Tab2.get(4) ),
+				rs.getString(	db.Tab2.get(5) ),
+				rs.getDouble(	db.Tab2.get(6) )
+		);
+	}
+
+	public Vists getVisitsPropPatientID(int ID) throws SQLException {
+		dbSchema db = new dbSchema();
+		ResultSet rs = findVisitsUsingPatientId(ID);
+		return new Vists(
+				rs.getInt(	    db.Tab2.get(0) ),
+				rs.getInt(  	db.Tab2.get(1) ),
+				rs.getString(   db.Tab2.get(2) ),
+				rs.getString(	db.Tab2.get(3) ),
+				rs.getString(	db.Tab2.get(4) ),
+				rs.getString(	db.Tab2.get(5) ),
+				rs.getDouble(	db.Tab2.get(6) )
+		);
+	}
 	// Get Users
 	public ResultSet getUsers() throws SQLException{
 		try{
@@ -159,6 +242,57 @@ public class SQLHelper{
 			dbSchema db = new dbSchema();
 			return stmt.executeQuery(
 					"SELECT * FROM " + dbSchema.TABLE1_NAME
+			);
+		} catch(SQLException e){
+			throw e;
+		}
+	}
+
+	// Get workers
+	public ResultSet getWorkers() throws SQLException{
+		try{
+			Statement stmt = con.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY,
+					ResultSet.HOLD_CURSORS_OVER_COMMIT
+			);
+			dbSchema db = new dbSchema();
+			return stmt.executeQuery(
+					"SELECT * FROM " + dbSchema.TABLE2_NAME
+			);
+		} catch(SQLException e){
+			throw e;
+		}
+	}
+
+	// Get Patients
+	public ResultSet getPatients() throws SQLException{
+		try{
+			Statement stmt = con.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY,
+					ResultSet.HOLD_CURSORS_OVER_COMMIT
+			);
+			dbSchema db = new dbSchema();
+			return stmt.executeQuery(
+					"SELECT * FROM " + dbSchema.TABLE3_NAME
+			);
+		} catch(SQLException e){
+			throw e;
+		}
+	}
+
+	// Get Visits
+	public ResultSet getVisits() throws SQLException{
+		try{
+			Statement stmt = con.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY,
+					ResultSet.HOLD_CURSORS_OVER_COMMIT
+			);
+			dbSchema db = new dbSchema();
+			return stmt.executeQuery(
+					"SELECT * FROM " + dbSchema.TABLE4_NAME
 			);
 		} catch(SQLException e){
 			throw e;
@@ -180,7 +314,7 @@ public class SQLHelper{
 	}
 
 	// search for user using ID
-	public ResultSet findByID(int ID) throws SQLException{
+	public ResultSet findUserById(int ID) throws SQLException{
 		try{
 			dbSchema db = new dbSchema();
 			return statement.executeQuery(
@@ -192,6 +326,57 @@ public class SQLHelper{
 		}
 	}
 
+	// search for worker using ID
+	public ResultSet findWorkerById(int ID) throws SQLException{
+		try{
+			dbSchema db = new dbSchema();
+			return statement.executeQuery(
+					"SELECT * FROM " + dbSchema.TABLE2_NAME +
+							" WHERE " + db.Tab2.get(0)+ "= " + ID
+			);
+		} catch(SQLException e){
+			throw e;
+		}
+	}
+
+	// search for patient using ID
+	public ResultSet findPatientById(int ID) throws SQLException{
+		try{
+			dbSchema db = new dbSchema();
+			return statement.executeQuery(
+					"SELECT * FROM " + dbSchema.TABLE3_NAME +
+							" WHERE " + db.Tab3.get(0)+ "= " + ID
+			);
+		} catch(SQLException e){
+			throw e;
+		}
+	}
+
+	// search for Vists using visitID
+	public ResultSet findVisitsUsingId(int ID) throws SQLException{
+		try{
+			dbSchema db = new dbSchema();
+			return statement.executeQuery(
+					"SELECT * FROM " + dbSchema.TABLE4_NAME +
+							" WHERE " + db.Tab4.get(0)+ "= " + ID
+			);
+		} catch(SQLException e){
+			throw e;
+		}
+	}
+
+	// search for Vists using Patient ID
+	public ResultSet findVisitsUsingPatientId(int ID) throws SQLException{
+		try{
+			dbSchema db = new dbSchema();
+			return statement.executeQuery(
+					"SELECT * FROM " + dbSchema.TABLE4_NAME +
+							" WHERE " + db.Tab4.get(1)+ "= " + ID
+			);
+		} catch(SQLException e){
+			throw e;
+		}
+	}
 
 	// This is only for testing
 	public void testSql() throws SQLException {
@@ -244,6 +429,8 @@ public class SQLHelper{
 	}
 
 	// Mostafa Did all of the inserts on his own :D
+	// Same with Deletes as well, he helped out a lot with the database and design <3
+
 	/**
 	 * @param ID 			UserID
 	 * @param USERNAME		the Username of the user
@@ -263,11 +450,10 @@ public class SQLHelper{
 	 */
 	// Insert into clinc Users
 	public boolean InsertIntoUsers(
-			int ID, String USERNAME,
-			String FIRST_NAME, String LAST_NAME, String PASSWORD,
-		        String EMAIL, String DOB, int AGE, String TELEPHONE,
-		        String ALTPHONE, String ADDRESS, String BLOOD_TYPE,
-		        int USERTYPE, char GENDER ) {
+			int ID, String USERNAME, String FIRST_NAME, String LAST_NAME, String PASSWORD,
+			String EMAIL, String DOB, int AGE, String TELEPHONE, String ALTPHONE,
+			String ADDRESS, String BLOOD_TYPE, int USERTYPE, char GENDER
+	) {
 
 		// if the values aren't NULL put them between ' '
 		if(TELEPHONE.compareTo("NULL") != 0){
@@ -303,19 +489,20 @@ public class SQLHelper{
 	 * @param SALARY	The worker's Salary
 	 * @param WORK_TIME	how much the worker must work
 	 * @param NOTES		Notes on the worker
-	 * @return -1 if failed, 0 on success
+	 * @return false if failed, true on success
 	 */
 	// Insert into workers table
-	public boolean InsertIntoWORKERS(
-			int WORKERID, double SALARY, String WORK_TIME, String NOTES
-	) {
+	public boolean InsertIntoWORKERS( int WORKERID, double SALARY, String WORK_TIME, String NOTES ) {
 		// If the values aren't null add ' ' to them
 		if(NOTES.compareTo("NULL") != 0){
 			NOTES = "'" + NOTES + "'";
 		}
+		if( !WORK_TIME.equals("NULL") )
+			WORK_TIME = "'" + WORK_TIME  + "'";
+
 		String SQL = 
-			"INSERT INTO " + dbSchema.TABLE2_NAME + " VALUES('" + WORKERID + 
-			"', '" + SALARY + "', '" + WORK_TIME + "', '" + NOTES + "')";
+			"INSERT INTO " + dbSchema.TABLE2_NAME + " VALUES(" + WORKERID +
+			", " + SALARY + ", " + WORK_TIME + ", " + NOTES + ")";
 		try{ 
 		statement.execute(SQL);
 		} catch( SQLException e ){
@@ -335,9 +522,7 @@ public class SQLHelper{
 	 * @return false if failed else true
 	 */
 	// Insert into patients
-	public boolean InsertIntoPATIENTS (
-			int PATIENTSID, String NOTES , String KNOWN_DISEASES, String PRESCRIPTION, String Question, String COMPLAINS
-	) {
+	public boolean InsertIntoPATIENTS ( int PATIENTSID, String NOTES , String KNOWN_DISEASES, String PRESCRIPTION, String Question, String COMPLAINS ) {
 		if( !NOTES.equals("NULL"))
 			NOTES = "'" + NOTES + "'";
 		if( !KNOWN_DISEASES.equals("NULL"))
@@ -361,20 +546,88 @@ public class SQLHelper{
 		return true;
 	}
 
-	public int InsertIntoVISTS( int VISITID, int PatientID,String PURPOSE,String VISITTYPE, String VISIT_TIME, String EXTRA, double COST ) {
+	public boolean InsertIntoVISTS( int VISITID, int PatientID,String PURPOSE,String VISITTYPE, String VISIT_TIME, String EXTRA, double COST ) {
+		// IF the inputed values are not NULL then swrround them with quotes to insert them in the database
+		if( !PURPOSE.equals("NULL") )
+			PURPOSE = "'" + PURPOSE + "'";
+		if( !VISITTYPE.equals("NULL") )
+			VISITTYPE = "'" + VISITTYPE + "'";
+		if( !VISIT_TIME.equals("NULL") )
+			VISIT_TIME = "'" + VISIT_TIME + "'";
+		if( !EXTRA.equals("NULL") )
+			EXTRA = "'" + EXTRA + "'";
+
+			// Our SQL Query
 			String SQL =
 			"INSERT INTO " + dbSchema.TABLE4_NAME +
-		" VALUES(" + VISITID + ", " + PatientID + ", '" + PURPOSE + "', '" + VISITTYPE + "', '" +
-					VISIT_TIME + "', '" + EXTRA + "', '" + COST + "')";
-		try{ 
+		" VALUES(" + VISITID + ", " + PatientID + ", " + PURPOSE + ", " + VISITTYPE + ", " + VISIT_TIME + ", " + EXTRA + ", " + COST + ")";
+			// Catch any errors
+		try{
+			// Run the SQL Command
 		statement.execute(SQL);
+		// IF error then print err and exit
 		} catch( SQLException e ){
 			System.err.println("ERROR! " + e);
-			return -1;
+			return false;
 		}
-		return 0;
+		return true;
 	}
 
+	// Such a long method name ugh but its better than unreadable code amiright.jpg
+	public boolean delFromUsersUsingUserName( String USERNAME ) {
+		String q = "DELETE from TABLE1_NAME WHERE USERNAME = '" + USERNAME +  "'";
+		try{
+			statement.execute(q);
+		} catch( SQLException e ){
+			System.err.println("ERROR! " + e);
+			return false;
+		}
+		return true;
+	}
+
+	public boolean delFromUsers( int ID ) {
+		String q = "DELETE from " + dbSchema.TABLE1_NAME + " WHERE ID = '" + ID + "'";
+		try{
+			statement.execute(q);
+		} catch( SQLException e ){
+			System.err.println("ERROR! " + e);
+			return false;
+		}
+		return true;
+	}
+
+	public boolean delFromWorkers( int WORKERID ) {
+		String q = "DELETE from TABLE2_NAME WHERE WORKERID = '" + WORKERID +  "'";
+		try{
+			statement.execute(q);
+		} catch( SQLException e ){
+			System.err.println("ERROR! " + e);
+			return false;
+		}
+		return true;
+	}
+
+		public boolean delFromPatients( int PATIENTID ) {
+			String q = "DELETE from " + dbSchema.TABLE3_NAME + " WHERE PATIENTID = '" + PATIENTID +  "'";
+			try{
+				statement.execute(q);
+			} catch( SQLException e ){
+				System.err.println("ERROR! " + e);
+				return false;
+			}
+			return true;
+		}
+
+		public boolean delFromVisits( int VISITID ) {
+			String q = "DELETE from " + dbSchema.TABLE4_NAME + " WHERE VISITID = '" + VISITID +  "'";
+			try{
+				statement.execute(q);
+			} catch( SQLException e ){
+				System.err.println("ERROR! " + e);
+				return false;
+			}
+			return true;
+		}
 	// these are to get the total number of rows
 	public int getUsersCount() throws SQLException {
 		return statement.executeQuery("SELECT COUNT(*) AS totalRows FROM " + dbSchema.TABLE1_NAME).getInt("totalRows");

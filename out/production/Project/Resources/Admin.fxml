@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.adminController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="809.0" prefWidth="1294.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.adminController">
    <left>
       <VBox prefHeight="616.0" prefWidth="208.0" style="-fx-background-color: #00a5e0;" BorderPane.alignment="CENTER">
          <children>
@@ -105,7 +105,7 @@
       <TableView fx:id="tabView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
+      <MenuBar style="-fx-background-color: #00a5e0;" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -120,7 +120,8 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About" />
+              <MenuItem mnemonicParsing="false" onAction="#showUserTypes" text="Note about UserTypes" />
+                  <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About" />
             </items>
           </Menu>
         </menus>
@@ -129,4 +130,46 @@
          </effect>
       </MenuBar>
    </top>
+   <bottom>
+      <Pane prefHeight="42.0" prefWidth="1280.0" style="-fx-background-color: #00a5e0;" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="207.0" layoutY="1.0" mnemonicParsing="false" onAction="#createNew" prefHeight="41.0" prefWidth="147.0" style="-fx-background-color: #03bafc;" text="New">
+               <graphic>
+                  <ImageView fitHeight="18.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Pics/GreenPlus.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="354.0" layoutY="1.0" mnemonicParsing="false" onAction="#deleteRow" prefHeight="41.0" prefWidth="170.0" style="-fx-background-color: #03bafc;" text="Delete Selected Row">
+               <graphic>
+                  <ImageView fitHeight="18.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Pics/RedX.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="524.0" layoutY="1.0" mnemonicParsing="false" onAction="#searchTable" prefHeight="41.0" prefWidth="170.0" style="-fx-background-color: #03bafc;" text="Search">
+               <graphic>
+                  <ImageView fitHeight="18.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Pics/search.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </bottom>
 </BorderPane>

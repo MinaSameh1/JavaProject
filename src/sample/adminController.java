@@ -2,20 +2,22 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.sql.ResultSet;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class adminController implements Initializable {
     @FXML
-    private TableView tabView = null;
+    private TableView<User> tabView = null;
+
+    ObservableList<User> usersList = null;
 
     // This is hardcoded for now sadly, the problem is with my User class, its not a problem that needs to refactor the code tho....
     private String[] cols = {
@@ -43,7 +45,7 @@ public class adminController implements Initializable {
 
         SQLHelper sqlHelper = new SQLHelper();
         TableViewHelper tableViewHelper = new TableViewHelper();
-        ObservableList<User> usersList = FXCollections.observableArrayList(tableViewHelper.getUsersAsList());
+        usersList = FXCollections.observableArrayList(tableViewHelper.getUsersAsList());
         try {
             sqlHelper.Init();
             ResultSet rs = sqlHelper.getUsers();
@@ -69,6 +71,9 @@ public class adminController implements Initializable {
         Main.MainProgram.showAbout();
     }
 
+    public void showUserTypes(){
+        Main.MainProgram.showHelp("USERTYPES");
+    }
     public void closeAdmin(){
         Main.MainProgram.DIE();
     }
@@ -79,16 +84,68 @@ public class adminController implements Initializable {
     }
 
     public void resetDatabase(){
-        SQLHelper helper = new SQLHelper();
-        try {
-            helper.Init();
-            helper.resetDatabase();
+        Optional<ButtonType> Confirm = new Alert(Alert.AlertType.CONFIRMATION, "This will delete ALL DATA INCLUDING PATIENTS AND VISTS! ARE YOU SURE YOU WANT TO DO THIS?").showAndWait();
+        ButtonType conf = Confirm.get();
+        if( conf == ButtonType.OK )
+        {
+            SQLHelper helper = new SQLHelper();
+            try {
+                helper.Init();
+                helper.resetDatabase();
 
+            } catch (Exception e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Error! " + e.getMessage()).showAndWait();
+            }
+            new Alert(Alert.AlertType.INFORMATION, "Success database reset! Please relogin in").showAndWait();
+            Main.MainProgram.startLogin();
+            Main.MainProgram.closeAdmin();
+        } else
+            return;
+    }
+
+    public void searchTable(){
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("search");
+        dialog.setHeaderText("The name you want to be found:");
+        dialog.setContentText("Name:");
+
+        Optional<String> result = dialog.showAndWait();
+        try{
+        TableViewHelper tableViewHelper = new TableViewHelper();
+        result.ifPresent( search -> {
+            System.out.println( result.get() );
+            usersList.removeAll( usersList );
+            usersList = FXCollections.observableArrayList(tableViewHelper.getUsersAsListByName(result.get()));
+            tabView.setItems(usersList);
+
+        });
         } catch (Exception e) {
             e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "Error! " + e.getMessage()).showAndWait();
         }
-        new Alert(Alert.AlertType.ERROR, "Success database reset! Please relogin in").showAndWait();
-        Main.MainProgram.startLogin();
     }
+
+    public void createNew(){
+
+    }
+
+    public void deleteRow(){
+        User user = tabView.getSelectionModel().getSelectedItem();
+        SQLHelper sqlHelper = new SQLHelper();
+        TableViewHelper tableViewHelper = new TableViewHelper();
+        try {
+            sqlHelper.Init();
+            sqlHelper.delFromPatients(user.getId());
+            sqlHelper.delFromUsers(user.getId());
+            new Alert(Alert.AlertType.INFORMATION, "Success deleted user").showAndWait();
+            usersList = FXCollections.observableArrayList(tableViewHelper.getUsersAsList());
+            tabView.setItems(usersList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            sqlHelper.die();
+        }
+
+    }
+
 }

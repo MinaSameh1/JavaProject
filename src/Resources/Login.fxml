@@ -63,11 +63,6 @@
                   <MenuItem mnemonicParsing="false" onAction="#LogClose" text="Close" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Settings">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Delete" />
-               </items>
-            </Menu>
             <Menu mnemonicParsing="false" onAction="#openAbout" text="About">
                <items>
                   <MenuItem mnemonicParsing="false" text="About" />

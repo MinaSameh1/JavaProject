@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.doctorAssistantController">
+   <center>
+      <AnchorPane prefWidth="944.0" style="-fx-background-color: #00a5e0;">
+         <children>
+            <TableView fx:id="tableVisitsView" blendMode="LIGHTEN" layoutX="44.0" layoutY="271.0" opacity="0.92" prefHeight="583.0" prefWidth="661.0" style="-fx-background-color: F0FFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="619.0" AnchorPane.topAnchor="217.0" />
+            <TableView fx:id="tablePatientsView" blendMode="LIGHTEN" layoutX="804.0" layoutY="400.0" opacity="0.93" prefHeight="582.0" prefWidth="615.0" style="-fx-background-color: #F0FFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="665.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="217.0" />
+            <ImageView fitHeight="90.0" fitWidth="86.0" layoutX="1123.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="684.0" AnchorPane.leftAnchor="1123.0" AnchorPane.rightAnchor="71.0" AnchorPane.topAnchor="30.0">
+               <image>
+                  <Image url="@Pics/clisym.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="48.0" layoutY="175.0" text="Visits : " textFill="#fafafa" underline="true" AnchorPane.bottomAnchor="600.0" AnchorPane.leftAnchor="29.0">
+               <font>
+                  <Font name="Urdu Typesetting Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="675.0" layoutY="175.0" text="Patient Data :" textFill="#fafafa" underline="true" AnchorPane.bottomAnchor="600.0" AnchorPane.leftAnchor="700.0">
+               <font>
+                  <Font name="Urdu Typesetting Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="29.0" layoutY="24.0" prefHeight="114.0" prefWidth="402.0" text="Clinic Manager " AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="24.0">
+               <font>
+                  <Font name="Urdu Typesetting Bold" size="51.0" />
+               </font>
+               <textFill>
+                  <RadialGradient centerX="0.4866666581895617" centerY="0.5496182914908606" focusAngle="16.03" focusDistance="-0.009345812218211513" radius="0.3971962260308667">
+                     <stops>
+                        <Stop color="WHITE" />
+                        <Stop color="#c5c5c5" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </textFill>
+            </Label>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

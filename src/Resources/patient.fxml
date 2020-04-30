@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.patientController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#logOut" text="Log Out" />
+                  <MenuItem mnemonicParsing="false" onAction="#exitProgram" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TableView fx:id="tableVisitsView" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="30.0" layoutY="25.0" text="Your ID:">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="IdLabel" layoutX="106.0" layoutY="25.0" text="id">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="30.0" layoutY="53.0" text="UserName:">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="UserNameLabel" layoutX="106.0" layoutY="53.0" text="name">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="34.0" layoutY="90.0" text="First Name: ">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="LastNameLabel" layoutX="138.0" layoutY="116.0" text="Last Name">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="34.0" layoutY="116.0" text="Last Name:">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="FirstNameLabel" layoutX="138.0" layoutY="90.0" text="firstName">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="36.0" layoutY="145.0" text="Email :">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="EmailLabel" layoutX="135.0" layoutY="145.0" text="email">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="37.0" layoutY="172.0" text="Dob">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="dobLabel" layoutX="132.0" layoutY="172.0" text="email">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="ageLabel" layoutX="39.0" layoutY="200.0" text="Age">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="dobLabel1" layoutX="134.0" layoutY="200.0" text="age">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="597.0" layoutY="34.0" text="Telephone">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="telephoneLabel" layoutX="701.0" layoutY="34.0" text="Telephone">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="599.0" layoutY="61.0" text="AltPhone">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="AltPhoneLabel" layoutX="703.0" layoutY="61.0" text="ALTPHONE">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="599.0" layoutY="90.0" text="Address">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="AddressLabel" layoutX="703.0" layoutY="90.0" text="Address">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="AddressLabel1" layoutX="599.0" layoutY="125.0" text="Blood Type">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="bloodLabel" layoutX="701.0" layoutY="125.0" text="bd">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="AddressLabel11" layoutX="598.0" layoutY="154.0" text="UserType:">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="UTLabel" layoutX="700.0" layoutY="154.0" text="bd">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="AddressLabel111" layoutX="604.0" layoutY="181.0" text="Gender">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="GenderLabel" layoutX="706.0" layoutY="181.0" text="M">
+                     <font>
+                        <Font name="Inconsolata Regular" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
+   </center>
+</BorderPane>

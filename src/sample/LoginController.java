@@ -47,15 +47,15 @@ public class LoginController {
                     case SQLHelper.dbSchema.doctor:
                         Main.MainProgram.startDoctor();
                         break;
-                    /*case SQLHelper.dbSchema.doctorAssistant:
-                        Main.MainProgram.startDoctorAssistant();
-                        break;*/
+                    case SQLHelper.dbSchema.doctorAssitant:
+                        Main.MainProgram.startDocAss();
+                        break;
                     case SQLHelper.dbSchema.cashier:
                         Main.MainProgram.startCashier();
                         break;
-                    /*case SQLHelper.dbSchema.patient:
-                        Main.MainProgram.startPatient();
-                        break;*/
+                    case SQLHelper.dbSchema.patient:
+                        Main.MainProgram.startPatient(logged.getId());
+                        break;
                 }
                 Main.MainProgram.hideLogin();
               UserName.clear();

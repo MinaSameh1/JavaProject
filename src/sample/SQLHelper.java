@@ -194,7 +194,7 @@ public class SQLHelper{
 				rs.getInt(  	db.Tab4.get(1) ),
 				rs.getString(   db.Tab4.get(2) ),
 				rs.getString(	db.Tab4.get(3) ),
-				Instant.ofEpochMilli(rs.getDate( db.Tab4.get(4) ).getTime()).atZone(ZoneId.systemDefault()).toLocalDate(),
+				rs.getDate(     db.Tab4.get(4) ),
 				rs.getString(	db.Tab4.get(5) ),
 				rs.getDouble(	db.Tab4.get(6) )
 		);
@@ -208,7 +208,7 @@ public class SQLHelper{
 				rs.getInt(  	db.Tab4.get(1) ),
 				rs.getString(   db.Tab4.get(2) ),
 				rs.getString(	db.Tab4.get(3) ),
-				Instant.ofEpochMilli(rs.getDate( db.Tab4.get(4) ).getTime()).atZone(ZoneId.systemDefault()).toLocalDate(),
+				rs.getDate(     db.Tab4.get(4) ),
 				rs.getString(	db.Tab4.get(5) ),
 				rs.getDouble(	db.Tab4.get(6) )
 		);
@@ -222,7 +222,7 @@ public class SQLHelper{
 				rs.getInt(  	db.Tab4.get(1) ),
 				rs.getString(   db.Tab4.get(2) ),
 				rs.getString(	db.Tab4.get(3) ),
-				Instant.ofEpochMilli(rs.getDate( db.Tab4.get(4) ).getTime()).atZone(ZoneId.systemDefault()).toLocalDate(),
+				rs.getDate(     db.Tab4.get(4) ),
 				rs.getString(	db.Tab4.get(5) ),
 				rs.getDouble(	db.Tab4.get(6) )
 		);
@@ -765,7 +765,7 @@ public class SQLHelper{
 			DB.Tab3.get(1) + " VARCHAR(20) NULL,"   +
 			DB.Tab3.get(2) + " VARCHAR(20) NULL,"   +
 			DB.Tab3.get(3) + " VARCHAR(20) NULL,"   +
-			DB.Tab3.get(4) + " VARCHAR(20) NULL,"   +
+			DB.Tab3.get(4) + " VARCHAR(60) NULL,"   +
 			DB.Tab3.get(5) + " VARCHAR(20) NULL,"   +
 
 					"CONSTRAINT PatientId PRIMARY KEY(" + DB.Tab3.get(0) + ")," +

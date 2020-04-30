@@ -132,6 +132,46 @@ public class TableViewHelper {
         }
     }
 
+    public List<Visits> getVisitsAsListById(int id) {
+        SQLHelper helper = new SQLHelper();
+        try {
+            List<Visits> list = new ArrayList<>();
+            helper.Init();
+            ResultSet rs = helper.findVisitsUsingId(id);
+            while (rs.next()) {
+                Visits visits = helper.getVisitsPropPatientID(id);
+                list.add(visits);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("ERROR " + e.getMessage());
+            return null;
+        } finally {
+            helper.die();
+        }
+    }
+
+    public List<Visits> getVisitsAsListByPatientId(int id) {
+        SQLHelper helper = new SQLHelper();
+        try {
+            List<Visits> list = new ArrayList<>();
+            helper.Init();
+            ResultSet rs = helper.findUserById(id);
+            while (rs.next()) {
+                Visits visits = helper.getVisitsPropPatientID(id);
+                list.add(visits);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("ERROR " + e.getMessage());
+            return null;
+        } finally {
+            helper.die();
+        }
+    }
+
     // This is hardcoded for now sadly, the problem is with my User class, its not a problem that needs to refactor the code tho....
     private String[] cols = {
             "Id",

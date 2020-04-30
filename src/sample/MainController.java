@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 public class MainController {
 
+    public static int UserID;
     // Login Page
     public Stage Login;
     // Registration Page
@@ -29,6 +30,10 @@ public class MainController {
     public Stage Doc = null;
     // Cashier's page
     public Stage Cashier = null;
+    // Doctor assistant
+    public Stage DocAss = null;
+    // Patient's page
+    public Stage patient = null;
 
     // empty constructor so if it gets called don't do anything *yet*
     public MainController(){ }
@@ -53,7 +58,12 @@ public class MainController {
         if( Cashier != null ){
             Cashier.close();
         }
-
+        if( DocAss != null ){
+            DocAss.close();
+        }
+        if( patient != null ){
+            patient.close();
+        }
     }
 
     public void setLoginStage(Stage stage){
@@ -193,7 +203,7 @@ public class MainController {
         try {
             BorderPane pane = FXMLLoader.load(getClass().getResource("../Resources/cashier.fxml"));
             Cashier = new Stage();
-            Cashier.setTitle("Clinic Manager Doctor Panel");
+            Cashier.setTitle("Clinic Manager Cashier Panel");
             Cashier.setScene(new Scene(pane));
             Cashier.show();
         } catch ( Exception e){
@@ -204,6 +214,68 @@ public class MainController {
         return true;
     }
 
+    public boolean startDocAss(){
+        // if the Stage is already open, show it don't start
+        if( DocAss != null){
+            Main.MainProgram.showDocAss();
+            return true;
+        }
+        try {
+            BorderPane pane = FXMLLoader.load(getClass().getResource("../Resources/Doctor Assistant.fxml"));
+            DocAss = new Stage();
+            DocAss.setTitle("Clinic Manager Doctor Assistant Panel");
+            DocAss.setScene(new Scene(pane));
+            DocAss.show();
+        } catch ( Exception e){
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "ERROR in " + e.getMessage()).showAndWait();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean startPatient(){
+        // if the Stage is already open, show it don't start
+        if( patient != null){
+            Main.MainProgram.showPatient();
+            return true;
+        }
+        try {
+            BorderPane pane = FXMLLoader.load(getClass().getResource("../Resources/patient.fxml"));
+            patient = new Stage();
+            patient.setTitle("Clinic Manager Doctor Assistant Panel");
+            patient.setScene(new Scene(pane));
+            patient.show();
+        } catch ( Exception e){
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "ERROR in " + e.getMessage()).showAndWait();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean startPatient(int id){
+        UserID = id;
+        // if the Stage is already open, show it don't start
+        if( patient != null){
+            Main.MainProgram.showPatient();
+            return true;
+        }
+        try {
+            BorderPane pane = FXMLLoader.load(getClass().getResource("../Resources/patient.fxml"));
+            patient = new Stage();
+            patient.setTitle("Clinic Manager Patient Panel");
+            patient.setScene(new Scene(pane));
+            patient.show();
+        } catch ( Exception e){
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "ERROR in " + e.getMessage()).showAndWait();
+            return false;
+        }
+        return true;
+    }
+
+    // methods to show our stages
     public void showReg(){
         if( Reg == null){
             System.err.println("ERROR Reg is null start it up first!");
@@ -244,6 +316,21 @@ public class MainController {
         Doc.show();
     }
 
+    public void showDocAss(){
+        if( DocAss == null){
+            System.err.println("ERROR addNew is null start it up first!");
+            return;
+        }
+        DocAss.show();
+    }
+    public void showPatient(){
+        if( patient == null){
+            System.err.println("ERROR patient is null start it up first!");
+            return;
+        }
+        patient.show();
+    }
+
     public void hideReg(){
         if( Reg == null){
             System.err.println("ERROR Reg is null start it up first!");
@@ -252,6 +339,7 @@ public class MainController {
         Reg.hide();
     }
 
+    // methods to close our stages
     public void closeReg(){
         Reg.close();
     }
@@ -269,6 +357,12 @@ public class MainController {
     }
     public void closeCashier(){
         Cashier.close();
+    }
+    public void closeDocAss(){
+        DocAss.close();
+    }
+    public void closePatient(){
+        patient.close();
     }
 
     public void showAbout(){

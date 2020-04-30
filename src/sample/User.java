@@ -11,7 +11,7 @@ public class User {
     private final StringProperty FirstName;
     private final StringProperty LastName;
     private final StringProperty Password;
-     private final StringProperty Email;
+    private final StringProperty Email;
     private final ObjectProperty<LocalDate> Dob;
     private final IntegerProperty Age;
     private final StringProperty Telephone;
@@ -43,13 +43,13 @@ public class User {
 
     //Getters and setters
 
-    public int getID() { return ID.get(); }
+    public int getId() { return ID.get(); }
 
-    public void setID(int ID) {
+    public void setId(int ID) {
         this.ID.set(ID);
     }
 
-    public IntegerProperty IDProperty() {
+    public IntegerProperty getIdProperty() {
         return ID;
     }
 
@@ -61,7 +61,7 @@ public class User {
         this.UserName.set(UserName);
     }
 
-    public StringProperty UserNameProperty() {
+    public StringProperty getUserNameProperty() {
         return UserName;
     }
 
@@ -73,7 +73,7 @@ public class User {
         this.FirstName.set(firstName);
     }
 
-    public StringProperty firstNameProperty() {
+    public StringProperty getFirstNameProperty() {
         return FirstName;
     }
 
@@ -83,7 +83,7 @@ public class User {
 
     public void setLastName(String lastName) { this.LastName.set(lastName); }
 
-    public StringProperty lastNameProperty() {
+    public StringProperty getLastNameProperty() {
         return LastName;
     }
 
@@ -95,7 +95,7 @@ public class User {
         this.Address.set(Address);
     }
 
-    public StringProperty AddressProperty() {
+    public StringProperty getAddressProperty() {
         return Address;
     }
 
@@ -105,7 +105,7 @@ public class User {
 
     public void setAge(int Age) { this.Age.set(Age); }
 
-    public IntegerProperty AgeProperty() {
+    public IntegerProperty getAgeProperty() {
         return Age;
     }
 
@@ -117,7 +117,7 @@ public class User {
         this.Password.set(Password);
     }
 
-    public StringProperty PasswordProperty() {
+    public StringProperty getPasswordProperty() {
         return Password;
     }
 
@@ -127,7 +127,7 @@ public class User {
         this.Dob.set(Dob);
     }
 
-    public ObjectProperty<LocalDate> DobProperty() {
+    public ObjectProperty<LocalDate> getDobProperty() {
         return Dob;
     }
 
@@ -139,7 +139,7 @@ public class User {
         this.Email.set(Email);
     }
 
-    public StringProperty EmailProperty() {
+    public StringProperty getEmailProperty() {
         return Email;
     }
     
@@ -151,7 +151,7 @@ public class User {
         this.Telephone.set(Telephone);
     }
 
-    public StringProperty TelephoneProperty() {
+    public StringProperty getTelephoneProperty() {
         return Telephone;
     }
 
@@ -163,7 +163,7 @@ public class User {
         this.AltTelephone.set(AltTelephone);
     }
 
-    public StringProperty AltTelephoneProperty() {
+    public StringProperty getAltTelephoneProperty() {
         return AltTelephone;
     }
 
@@ -175,7 +175,7 @@ public class User {
         this.BloodType.set(BloodType);
     }
 
-    public StringProperty BloodTypeProperty() {
+    public StringProperty getBloodTypeProperty() {
         return BloodType;
     }
 
@@ -187,7 +187,7 @@ public class User {
         this.UserType.set(UserType);
     }
 
-    public IntegerProperty UserTypeProperty() {
+    public IntegerProperty getUserTypeProperty() {
         return UserType;
     }
 
@@ -199,7 +199,8 @@ public class User {
         this.Gender.set(Gender);
     }
 
-    public StringProperty GenderProperty() {
+    public StringProperty getGenderProperty() {
         return Gender;
     }
+
 }

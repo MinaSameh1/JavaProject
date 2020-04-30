@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 
 import java.time.Instant;
@@ -12,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 
 public class SQLHelper{
@@ -75,7 +77,7 @@ public class SQLHelper{
 	public void readDB() throws Exception { }
 
 
-	// Ready the user Class
+	//// Ready the user Class
 	// byID
 	public User getUserPropById(int id) throws SQLException {
 		ResultSet rs = findByID(id);
@@ -98,8 +100,29 @@ public class SQLHelper{
 				rs.getInt(      db.Tab1.get(12) ),
 				rs.getString(   db.Tab1.get(13) )
 		);
-
 	}
+
+	public User getUserProp(ResultSet rs) throws SQLException {
+		dbSchema db = new dbSchema();
+		return new User(
+				rs.getInt(      db.Tab1.get(0)  ),
+				rs.getString(   db.Tab1.get(1)  ),
+				rs.getString(   db.Tab1.get(2)  ),
+				rs.getString(   db.Tab1.get(3)  ),
+				rs.getString(   db.Tab1.get(4)  ),
+				rs.getString(   db.Tab1.get(5)  ),
+				// Convert Date to localDate
+				Instant.ofEpochMilli(rs.getDate( db.Tab1.get(6) ).getTime()).atZone(ZoneId.systemDefault()).toLocalDate(),
+				rs.getInt(      db.Tab1.get(7)  ),
+				rs.getString(   db.Tab1.get(8)  ),
+				rs.getString(   db.Tab1.get(9)  ),
+				rs.getString(   db.Tab1.get(10) ),
+				rs.getString(   db.Tab1.get(11) ),
+				rs.getInt(      db.Tab1.get(12) ),
+				rs.getString(   db.Tab1.get(13) )
+		);
+	}
+
 	// ByName
 	public User getUserPropByName(String username) throws SQLException {
 		ResultSet rs = findByUserName(username);
@@ -125,6 +148,23 @@ public class SQLHelper{
 
 	}
 
+	// Get Users
+	public ResultSet getUsers() throws SQLException{
+		try{
+			Statement stmt = con.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY,
+					ResultSet.HOLD_CURSORS_OVER_COMMIT
+			);
+			dbSchema db = new dbSchema();
+			return stmt.executeQuery(
+					"SELECT * FROM " + dbSchema.TABLE1_NAME
+			);
+		} catch(SQLException e){
+			throw e;
+		}
+	}
+
 	// Note to self: Use execute statement for data manipulation 
 	// like insert, update and delete and executeQuery for data retrieval like select
 	public ResultSet findByUserName(String name) throws SQLException{
@@ -139,6 +179,7 @@ public class SQLHelper{
 		}
 	}
 
+	// search for user using ID
 	public ResultSet findByID(int ID) throws SQLException{
 		try{
 			dbSchema db = new dbSchema();
@@ -150,6 +191,7 @@ public class SQLHelper{
 			throw e;
 		}
 	}
+
 
 	// This is only for testing
 	public void testSql() throws SQLException {
@@ -163,32 +205,6 @@ public class SQLHelper{
 		}
 	}
 
-	// This is to populate the table view in admin/doctor's page
-	/*
-	 * @parm:
-	 */
-	/*public TableView getDataBaseData(int temp){
-			dbSchema db = new dbSchema();
-			String SQL = null;
-			switch(temp){
-				case 1:
-						SQL="SELECT * FROM " + dbSchema.TABLE1_NAME;
-						break;
-				case 2:
-						SQL="SELECT * FROM " + dbSchema.TABLE2_NAME;
-						break;
-				case 3:
-						SQL="SELECT * FROM " + dbSchema.TABLE3_NAME;
-						break;
-				case 4:
-						SQL="SELECT * FROM " + dbSchema.TABLE4_NAME;
-						break;
-				default:
-						return null;
-			};
-		System.out.println("TEST " + SQL);
-		return null;
-	}*/
 
 	// this is Login in
 	public boolean HandleLogin(String name,String pass){
@@ -307,23 +323,35 @@ public class SQLHelper{
 			return false;
 		}
 		return true;
-
 	}
 
 	/**
 	 * @param PATIENTSID 		 The patients User ID
 	 * @param NOTES				 Notes on the patient
-	 * @param KONOWN_DISEASES	 The disease the patient has like diabities
+	 * @param KNOWN_DISEASES	 The disease the patient has like diabities
 	 * @param PRESCRIPTION		 The prescription the patient is on (The ones the doctor gave to him)
-	 * @return -1 if failed, 0 on success
+	 * @param Question           If the patient has any questions, he will asks here
+	 * @param COMPLAINS          what the patient complains about (stomach ache, headache etc etc)
+	 * @return false if failed else true
 	 */
 	// Insert into patients
 	public boolean InsertIntoPATIENTS (
-			int PATIENTSID, String NOTES , String KONOWN_DISEASES, String PRESCRIPTION
+			int PATIENTSID, String NOTES , String KNOWN_DISEASES, String PRESCRIPTION, String Question, String COMPLAINS
 	) {
+		if( !NOTES.equals("NULL"))
+			NOTES = "'" + NOTES + "'";
+		if( !KNOWN_DISEASES.equals("NULL"))
+			KNOWN_DISEASES = "'" + KNOWN_DISEASES + "'";
+		if( !PRESCRIPTION.equals("NULL"))
+			PRESCRIPTION = "'" + PRESCRIPTION + "'";
+		if( !Question.equals("NULL"))
+			Question = "'" + Question + "'";
+		if( !COMPLAINS.equals("NULL"))
+			COMPLAINS = "'" + COMPLAINS + "'";
+
 		String SQL = "INSERT INTO " + dbSchema.TABLE3_NAME + 
-			" VALUES('" + PATIENTSID + "', '" + NOTES 
-			+ "', '" + KONOWN_DISEASES + "', '" + PRESCRIPTION + "')";
+			" VALUES(" + PATIENTSID + ", " + NOTES
+			+ ", " + KNOWN_DISEASES + ", " + PRESCRIPTION + " , " + Question + " , " + COMPLAINS + ")";
 		try{
 		statement.execute(SQL);
 		} catch( SQLException e ){
@@ -367,7 +395,7 @@ public class SQLHelper{
 			Helper.InsertIntoUsers(
 					1,"admin","Admin","Owner","admin","ADMIN@EMAIL.COM",
 							"1999-05-18" ,20,"01252515125","NULL",
-							"3in Shams","NULL",0,'M'
+							"3in Shams","NULL", dbSchema.admin ,'M'
 			);
 			// add admin to workers
 			Helper.InsertIntoWORKERS(
@@ -447,7 +475,11 @@ public class SQLHelper{
 			DB.Tab3.get(0) + " INT 	NOT NULL," + 
 			DB.Tab3.get(1) + " VARCHAR(20) NULL,"   +
 			DB.Tab3.get(2) + " VARCHAR(20) NULL,"   +
-			"CONSTRAINT PatientId PRIMARY KEY(" + DB.Tab3.get(0) + ")," +
+			DB.Tab3.get(3) + " VARCHAR(20) NULL,"   +
+			DB.Tab3.get(4) + " VARCHAR(20) NULL,"   +
+			DB.Tab3.get(5) + " VARCHAR(20) NULL,"   +
+
+					"CONSTRAINT PatientId PRIMARY KEY(" + DB.Tab3.get(0) + ")," +
 			"CONSTRAINT FK_PatientID FOREIGN KEY (" + DB.Tab3.get(0) + 
 			") REFERENCES " + dbSchema.TABLE1_NAME  +
 		       	"( " + DB.Tab1.get(0) + " ) );"
@@ -487,7 +519,12 @@ public class SQLHelper{
 		public static final String TABLE3_NAME = "PATIENTS";
 		// The Visits table
 		public static final String TABLE4_NAME = "Vists";
-
+		// UserTypes
+		public static final int admin = 0;
+		public static final int doctor = 1;
+		public static final int doctorAssitant = 2;
+		public static final int cashier = 3;
+		public static final int patient = 4;
 		// General Users Table
 		public ArrayList<String> Tab1 = new ArrayList<String>();
 		// Workers Table aka doctors and staff
@@ -524,6 +561,8 @@ public class SQLHelper{
 			Tab3.add("NOTES");
 			Tab3.add("KNOWN_DISEASES");
 			Tab3.add("PRESCRIPTION");
+			Tab3.add("QUESTION");
+			Tab3.add("COMPLAINS");
 			//Table 4
 			Tab4.add("VISITID");
 			Tab4.add("PatientID");

@@ -20,7 +20,9 @@ public class MainController {
     // Registration Page
     public Stage Reg = null;
 
-    public MainController() {}
+    public Stage admin = null;
+
+    public MainController(){ }
 
     // Close the program and all stages
     public void DIE(){
@@ -29,6 +31,9 @@ public class MainController {
         }
         if( Reg != null ){
             Reg.close();
+        }
+        if(admin != null){
+            admin.close();
         }
 
     }
@@ -94,9 +99,36 @@ public class MainController {
         return true;
     }
 
+    public boolean startAdmin(){
+        // if the Stage is already open, show it don't start
+        if( admin != null){
+            Main.MainProgram.showAdmin();
+            return true;
+        }
+        try {
+            BorderPane pane = FXMLLoader.load(getClass().getResource("../Resources/Admin.fxml"));
+            admin = new Stage();
+            admin.setTitle("Clinic Manager Admin Panel");
+            admin.setScene(new Scene(pane));
+            admin.show();
+        } catch ( Exception e){
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "ERROR in " + e.getMessage()).showAndWait();
+            return false;
+        }
+        return true;
+    }
+
+    public void showAdmin(){
+        if( admin == null){
+            System.err.println("ERROR admin is null start it up first!");
+            return;
+        }
+        admin.show();
+    }
+
+
     public Stage getRegStage(){
-        if( Reg == null)
-            return null;
         return Reg;
     }
 
@@ -121,6 +153,9 @@ public class MainController {
     }
     public void closeLogin(){
         Login.close();
+    }
+    public void closeAdmin(){
+        admin.close();
     }
 
     public void showAbout(){

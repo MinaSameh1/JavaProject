@@ -18,8 +18,8 @@ public class LoginController {
     private MenuItem LogMenuClose;
     private Stage stage;
 
-    // our event to handle button click
-    public void handleLog(){
+    // our event to handle login button click
+    public void handleLog() throws Exception {
         // If the text fields are empty tell user
         if(UserName.getText().isEmpty() || Password.getText().isEmpty() ){
             labelWelcome.setText("Please Enter Username and Password!");
@@ -38,9 +38,28 @@ public class LoginController {
             // see if username and pass are correct
             if( helper.HandleLogin(UserName.getText(),Password.getText()) ){
                 System.out.println("WELCOME " + UserName.getText());
-                labelWelcome.setText("WELCOME USER:" + UserName.getText() );
                 User logged = helper.getUserPropByName(UserName.getText());
-                System.out.println(logged.getUserName() + " " + logged.getAge() + " " + logged.getAddress() + " " + logged.getPassword() + " " + logged.getID());
+                // Open the correct form
+              switch( logged.getUserType() ){
+                    case SQLHelper.dbSchema.admin:
+                        Main.MainProgram.startAdmin();
+                        break;
+                    /*case SQLHelper.dbSchema.doctor:
+                        Main.MainProgram.startDoctor();
+                        break;
+                    case SQLHelper.dbSchema.doctorAssistant:
+                        Main.MainProgram.startDoctorAssistant();
+                        break;
+                    case SQLHelper.dbSchema.cashier:
+                        Main.MainProgram.startCashier();
+                        break;
+                    case SQLHelper.dbSchema.patient:
+                        Main.MainProgram.startPatient();
+                        break;*/
+                }
+                Main.MainProgram.hideLogin();
+              UserName.clear();
+              Password.clear();
             }
             else {
                 System.out.println("FAILED WRONG PASS OR NAME" + UserName.getText() + "  " + Password.getText() );
@@ -58,11 +77,10 @@ public class LoginController {
     // Open Register Stage
     public void openRegister(){
         try {
-            System.out.println("Openning Reg");
             if(Main.MainProgram.startReg() )
                 Main.MainProgram.hideLogin();
             else {
-                System.out.println("FAILLLED to Open registration form!");
+                System.err.println("FAILLLED to Open registration form!");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,6 +98,8 @@ public class LoginController {
         Main.MainProgram.showAbout();
     }
 
-
+    public void openAdmin(){
+        Main.MainProgram.startAdmin();
+    }
 
 }

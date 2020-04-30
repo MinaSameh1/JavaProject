@@ -164,16 +164,14 @@ public class RegisterController implements Initializable {
                     }
                 }
             });
-            // TESTING
-            new Alert(Alert.AlertType.ERROR, "THIS IS THE DATE!! " + DOB.getValue().toString()).showAndWait();
 
             // Insert the user data into the users and patients
             Helper.InsertIntoUsers(
                     ID , UserNameText.getText() , FirstNameText.getText() , LastNameText.getText() , PasswordText.getText() , EmailText.getText() ,
                     DOB.getValue().toString(),Integer.valueOf(AgeText.getText()),"0" + TelephoneText.getText(), "0" + AltPhoneText.getText(), AddressText.getText(),
-                    BloodTypeBox.getValue().toString(),4,Gender
+                    BloodTypeBox.getValue().toString(),SQLHelper.dbSchema.patient,Gender
             );
-            Helper.InsertIntoPATIENTS(ID,"NULL","NULL","NULL");
+            Helper.InsertIntoPATIENTS(ID,"NULL","NULL","NULL","NULL","NULL");
             // SUCCESS TELL THE USER
             new Alert(Alert.AlertType.CONFIRMATION, "Registration Successful, Will open login page now").showAndWait();
 
@@ -202,9 +200,7 @@ public class RegisterController implements Initializable {
         Main.MainProgram.showLogin();
     }
 
-    public void exitReg(){
-        Main.MainProgram.DIE();
-    }
+    public void exitReg(){ Main.MainProgram.DIE(); }
 
     public void openHelp(){
         Main.MainProgram.showHelp("HELPREG");

@@ -4,7 +4,6 @@ import javafx.scene.control.Alert;
 
 import java.sql.*;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 
@@ -188,9 +187,9 @@ public class SQLHelper{
 		);
 	}
 
-	public Vists getVisitsProp(ResultSet rs) throws SQLException {
+	public Visits getVisitsProp(ResultSet rs) throws SQLException {
 		dbSchema db = new dbSchema();
-		return new Vists(
+		return new Visits(
 				rs.getInt(	    db.Tab4.get(0) ),
 				rs.getInt(  	db.Tab4.get(1) ),
 				rs.getString(   db.Tab4.get(2) ),
@@ -201,10 +200,10 @@ public class SQLHelper{
 		);
 	}
 
-	public Vists getVisitsPropVisitID(int ID) throws SQLException {
+	public Visits getVisitsPropVisitID(int ID) throws SQLException {
 		dbSchema db = new dbSchema();
 		ResultSet rs = findVisitsUsingId(ID);
-		return new Vists(
+		return new Visits(
 				rs.getInt(	    db.Tab4.get(0) ),
 				rs.getInt(  	db.Tab4.get(1) ),
 				rs.getString(   db.Tab4.get(2) ),
@@ -215,10 +214,10 @@ public class SQLHelper{
 		);
 	}
 
-	public Vists getVisitsPropPatientID(int ID) throws SQLException {
+	public Visits getVisitsPropPatientID(int ID) throws SQLException {
 		dbSchema db = new dbSchema();
 		ResultSet rs = findVisitsUsingPatientId(ID);
-		return new Vists(
+		return new Visits(
 				rs.getInt(	    db.Tab4.get(0) ),
 				rs.getInt(  	db.Tab4.get(1) ),
 				rs.getString(   db.Tab4.get(2) ),
@@ -349,7 +348,7 @@ public class SQLHelper{
 		}
 	}
 
-	// search for Vists using visitID
+	// search for Visits using visitID
 	public ResultSet findVisitsUsingId(int ID) throws SQLException{
 		try{
 			dbSchema db = new dbSchema();
@@ -362,7 +361,7 @@ public class SQLHelper{
 		}
 	}
 
-	// search for Vists using Patient ID
+	// search for Visits using Patient ID
 	public ResultSet findVisitsUsingPatientId(int ID) throws SQLException{
 		try{
 			dbSchema db = new dbSchema();
@@ -425,6 +424,24 @@ public class SQLHelper{
 		return ID;
 	}
 
+	public int CreateVisitsID() throws SQLException {
+		// Make sure we can scroll through the results, will be slower than normal scrolling
+		Statement stmt = con.createStatement(
+				ResultSet.TYPE_SCROLL_INSENSITIVE,
+				ResultSet.CONCUR_READ_ONLY
+		);
+		// get the ID only
+		ResultSet rs = stmt.executeQuery(
+				"SELECT VISITID FROM " + dbSchema.TABLE4_NAME
+		);
+		// jump to the last one
+		rs.last();
+		// Normally i would do return re.getInt(id) + 1, but i think its better to close the stmt and rs first
+		int ID = rs.getInt("VISITID") + 1;
+		stmt.close();
+		rs.close();
+		return ID;
+	}
 	// Mostafa Did all of the inserts on his own :D
 	// Same with Deletes as well, he helped out a lot with the database and design <3
 
@@ -672,6 +689,7 @@ public class SQLHelper{
 			Helper.InsertIntoWORKERS(
 					1,0,"11:00 am - 8:00 pm", "NULL"
 			);
+			Helper.InsertIntoVISTS(1,1,"Test","Reveal","Xray",600.52);
 
 	}
 
@@ -698,7 +716,7 @@ public class SQLHelper{
 		stmt.execute(
 				"IF EXISTS (SELECT * FROM sys.foreign_keys WHERE " +
 				"name='FK_vPatId'" + 
-				") ALTER TABLE " + dbSchema.TABLE4_NAME + 
+				") ALTER TABLE " + dbSchema.TABLE4_NAME +
 				" DROP CONSTRAINT FK_vPatId"
 				);
 
@@ -789,7 +807,7 @@ public class SQLHelper{
 		// The Patients table
 		public static final String TABLE3_NAME = "PATIENTS";
 		// The Visits table
-		public static final String TABLE4_NAME = "Vists";
+		public static final String TABLE4_NAME = "Visits";
 		// UserTypes
 		public static final int admin = 0;
 		public static final int doctor = 1;

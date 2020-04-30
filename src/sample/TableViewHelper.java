@@ -112,15 +112,15 @@ public class TableViewHelper {
         }
     }
 
-    public List<Vists> getVisitsAsList() {
+    public List<Visits> getVisitsAsList() {
         SQLHelper helper = new SQLHelper();
         try {
-            List<Vists> list = new ArrayList<>();
+            List<Visits> list = new ArrayList<>();
             helper.Init();
             ResultSet rs = helper.getVisits();
             while (rs.next()) {
-                Vists vists = helper.getVisitsProp(rs);
-                list.add(vists);
+                Visits visits = helper.getVisitsProp(rs);
+                list.add(visits);
             }
             return list;
         } catch (Exception e) {
@@ -184,5 +184,30 @@ public class TableViewHelper {
         return null;
     }
 
+    /*
+    public void startVisitsTable(TableView<Visits> tableVisitsView, ObservableList<Visits> tableVisitsList, String[] VisitsCols, String[] VisitsNamesCols ){
+        SQLHelper sqlHelper = new SQLHelper();
+        tableVisitsList = FXCollections.observableArrayList(getVisitsAsList());
+        try {
+            sqlHelper.Init();
+            ResultSet rs = sqlHelper.getVisits();
+            VisitsCols = new String[rs.getMetaData().getColumnCount()];
+            for( int i=1; i <= rs.getMetaData().getColumnCount(); i++ ){
+                VisitsCols[i-1] = rs.getMetaData().getColumnName(i);
+            }
+            tableVisitsView.setItems(tableVisitsList);
+            tableVisitsView.setColumnResizePolicy(
+                    TableView.CONSTRAINED_RESIZE_POLICY);
+            for ( int i = 0; i < VisitsCols.length; i++ ) {
+                TableColumn<Visits, Object> col  = new TableColumn<>(VisitsCols[i]);
+                col.setCellValueFactory(new PropertyValueFactory<>(VisitsCols[i]));
+                tableVisitsView.getColumns().add(col);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            sqlHelper.die();
+        }
+    }*/
 
 }

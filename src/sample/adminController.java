@@ -20,14 +20,14 @@ public class adminController implements Initializable {
     @FXML
     private TableView<Patient> tablePatientsView = null;
     @FXML
-    private TableView<Vists> tableVisitsView = null;
+    private TableView<Visits> tableVisitsView = null;
 
     TableViewHelper tableViewHelper = new TableViewHelper();
 
     ObservableList<User> tableUserList = null;
     ObservableList<Worker> tableWorkerList = null;
     ObservableList<Patient> tablePatientList = null;
-    ObservableList<Vists> tableVisitsList = null;
+    ObservableList<Visits> tableVisitsList = null;
 
 
     // This is hardcoded for now sadly, the problem is with my User class, its not a problem that needs to refactor the code tho....
@@ -269,7 +269,7 @@ public class adminController implements Initializable {
             tableVisitsView.setColumnResizePolicy(
                     TableView.CONSTRAINED_RESIZE_POLICY);
             for ( int i = 0; i < VisitsCols.length; i++ ) {
-                TableColumn<Vists, Object> col  = new TableColumn<>(VisitsCols[i]);
+                TableColumn<Visits, Object> col  = new TableColumn<>(VisitsCols[i]);
                 col.setCellValueFactory(new PropertyValueFactory<>(VisitsCols[i]));
                 tableVisitsView.getColumns().add(col);
             }

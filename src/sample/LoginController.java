@@ -44,16 +44,16 @@ public class LoginController {
                     case SQLHelper.dbSchema.admin:
                         Main.MainProgram.startAdmin();
                         break;
-                    /*case SQLHelper.dbSchema.doctor:
+                    case SQLHelper.dbSchema.doctor:
                         Main.MainProgram.startDoctor();
                         break;
-                    case SQLHelper.dbSchema.doctorAssistant:
+                    /*case SQLHelper.dbSchema.doctorAssistant:
                         Main.MainProgram.startDoctorAssistant();
-                        break;
+                        break;*/
                     case SQLHelper.dbSchema.cashier:
                         Main.MainProgram.startCashier();
                         break;
-                    case SQLHelper.dbSchema.patient:
+                    /*case SQLHelper.dbSchema.patient:
                         Main.MainProgram.startPatient();
                         break;*/
                 }

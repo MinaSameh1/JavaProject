@@ -17,6 +17,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
         MainProgram.setLoginStage(primaryStage);
         VBox root = new VBox();
         BorderPane pane = null;

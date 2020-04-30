@@ -25,6 +25,10 @@ public class MainController {
     public Stage admin = null;
     // add new page
     public Stage addNew = null;
+    // Doctor's page
+    public Stage Doc = null;
+    // Cashier's page
+    public Stage Cashier = null;
 
     // empty constructor so if it gets called don't do anything *yet*
     public MainController(){ }
@@ -39,6 +43,15 @@ public class MainController {
         }
         if(admin != null){
             admin.close();
+        }
+        if( addNew != null ){
+            addNew.close();
+        }
+        if( Doc != null ){
+            Doc.close();
+        }
+        if( Cashier != null ){
+            Cashier.close();
         }
 
     }
@@ -151,9 +164,44 @@ public class MainController {
         return true;
     }
 
+    public boolean startDoctor(){
+        // if the Stage is already open, show it don't start
+        if( Doc != null){
+            Main.MainProgram.showDoc();
+            return true;
+        }
+        try {
+            BorderPane pane = FXMLLoader.load(getClass().getResource("../Resources/doctor.fxml"));
+            Doc = new Stage();
+            Doc.setTitle("Clinic Manager Doctor Panel");
+            Doc.setScene(new Scene(pane));
+            Doc.show();
+        } catch ( Exception e){
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "ERROR in " + e.getMessage()).showAndWait();
+            return false;
+        }
+        return true;
+    }
 
-    public Stage getRegStage(){
-        return Reg;
+    public boolean startCashier(){
+        // if the Stage is already open, show it don't start
+        if( Cashier != null){
+            Main.MainProgram.showCashier();
+            return true;
+        }
+        try {
+            BorderPane pane = FXMLLoader.load(getClass().getResource("../Resources/cashier.fxml"));
+            Cashier = new Stage();
+            Cashier.setTitle("Clinic Manager Doctor Panel");
+            Cashier.setScene(new Scene(pane));
+            Cashier.show();
+        } catch ( Exception e){
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "ERROR in " + e.getMessage()).showAndWait();
+            return false;
+        }
+        return true;
     }
 
     public void showReg(){
@@ -180,6 +228,22 @@ public class MainController {
         addNew.show();
     }
 
+    public void showDoc(){
+        if( Doc == null){
+            System.err.println("ERROR Doc is null start it up first!");
+            return;
+        }
+        Doc.show();
+    }
+
+    public void showCashier(){
+        if( Cashier == null){
+            System.err.println("ERROR Cashier is null start it up first!");
+            return;
+        }
+        Doc.show();
+    }
+
     public void hideReg(){
         if( Reg == null){
             System.err.println("ERROR Reg is null start it up first!");
@@ -199,6 +263,12 @@ public class MainController {
     }
     public void closeAddNew(){
         addNew.close();
+    }
+    public void closeDoc(){
+        Doc.close();
+    }
+    public void closeCashier(){
+        Cashier.close();
     }
 
     public void showAbout(){

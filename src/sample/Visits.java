@@ -5,7 +5,7 @@ import javafx.beans.property.*;
 import java.time.LocalDate;
 
 // ADD VISIT TIME
-public class Vists {
+public class Visits {
 
     private final IntegerProperty VISITID;
     private final IntegerProperty PatientID;
@@ -17,7 +17,7 @@ public class Vists {
     private final ObjectProperty<LocalDate> VISITTIME;
     private final DoubleProperty COST;
 
-    public Vists(int VISITID , int PatientID,String PURPOSE, String VISITTYPE, LocalDate VISITTIME, String EXTRA,double COST) {
+    public Visits(int VISITID , int PatientID, String PURPOSE, String VISITTYPE, LocalDate VISITTIME, String EXTRA, double COST) {
         this.VISITID = new SimpleIntegerProperty(VISITID );
         this.PatientID = new SimpleIntegerProperty(PatientID);
         this.PURPOSE  = new SimpleStringProperty(PURPOSE);

@@ -191,7 +191,7 @@ public class UserController implements Initializable {
             }
 
             // SUCCESS TELL THE USER
-            new Alert(Alert.AlertType.INFORMATION, "Registration Successful, Will open login page now").showAndWait();
+            new Alert(Alert.AlertType.INFORMATION, "Registration Successful!").showAndWait();
 
             // Exit addnew
             Main.MainProgram.closeAddNew();

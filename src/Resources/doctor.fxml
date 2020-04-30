@@ -88,7 +88,7 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="592.0" layoutY="27.0" text="0" textFill="#33fff0">
+                  <Label fx:id="visitIDlabel" layoutX="592.0" layoutY="27.0" text="0" textFill="#33fff0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -98,7 +98,7 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="592.0" layoutY="57.0" text="0" textFill="#33fff0">
+                  <Label fx:id="visitPatientIDLabel" layoutX="592.0" layoutY="57.0" text="0" textFill="#33fff0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -118,17 +118,17 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="656.0" layoutY="87.0" text="visit" textFill="#33fff0">
+                  <Label fx:id="visitPurpose" layoutX="656.0" layoutY="87.0" text="visit" textFill="#33fff0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="656.0" layoutY="120.0" text="visit" textFill="#33fff0">
+                  <Label fx:id="visitType" layoutX="656.0" layoutY="120.0" text="visit" textFill="#33fff0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="656.0" layoutY="153.0" text="visit" textFill="#33fff0">
+                  <Label fx:id="extraLabel" layoutX="656.0" layoutY="153.0" text="visit" textFill="#33fff0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -149,7 +149,7 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="notesText" layoutX="194.0" layoutY="220.0" />
+                  <TextField fx:id="notesText" layoutX="194.0" layoutY="221.0" />
                   <Label layoutX="32.0" layoutY="224.0" text="Notes:" textFill="#33fff0">
                      <font>
                         <Font name="System Bold" size="15.0" />

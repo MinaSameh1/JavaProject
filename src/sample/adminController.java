@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -27,10 +26,12 @@ public class adminController implements Initializable {
 
     ObservableList<User> tableUserList = null;
     ObservableList<Worker> tableWorkerList = null;
+    ObservableList<Patient> tablePatientList = null;
+    ObservableList<Vists> tableVisitsList = null;
 
 
     // This is hardcoded for now sadly, the problem is with my User class, its not a problem that needs to refactor the code tho....
-    private String[] UsersCols_1 = {
+    private String[] userColsNames = {
             "Id",
             "UserName",
             "FirstName",
@@ -47,7 +48,23 @@ public class adminController implements Initializable {
             "Gender"
     };
 
-    // hey atleast this one isn't hardcoded :D
+    private String[] workerColsNames = {
+            "Id",
+            "Salary",
+            "WorkTime",
+            "Notes"
+    };
+
+    private String[] patientColsNames = {
+            "Id",
+            "KnownDiseases",
+            "Notes",
+            "Prescription",
+            "Question",
+            "Complains"
+    };
+
+    // hey atleast These Ones aren't hardcoded :D
     private String[] UserCols;
     private String[] WorkerCols;
     private String[] PatientsCols;
@@ -56,6 +73,9 @@ public class adminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         startTableUsers();
+        startTableWorkers();
+        startPatientsTable();
+        startVisitsTable();
     }
 
     public void showAbout(){
@@ -142,8 +162,24 @@ public class adminController implements Initializable {
         tableUsersView.setItems(tableUserList);
     }
 
+    public void reloadWorkersTable(){
+        tableWorkerList = FXCollections.observableArrayList(tableViewHelper.getWorkersAsList());
+        tableWorkersView.setItems(tableWorkerList);
+    }
+
+
+    public void reloadPatientsTable(){
+        tablePatientList = FXCollections.observableArrayList(tableViewHelper.getPatientsAsList());
+        tablePatientsView.setItems(tablePatientList);
+    }
+
+
+    public void reloadVisitsTable(){
+        tableVisitsList = FXCollections.observableArrayList(tableViewHelper.getVisitsAsList());
+        tableVisitsView.setItems(tableVisitsList);
+    }
+
     public void startTableUsers(){
-        tableUsersView.getColumns().removeAll(tableUserList);
         SQLHelper sqlHelper = new SQLHelper();
         tableUserList = FXCollections.observableArrayList(tableViewHelper.getUsersAsList());
         try {
@@ -157,9 +193,9 @@ public class adminController implements Initializable {
             tableUsersView.setColumnResizePolicy(
                     TableView.CONSTRAINED_RESIZE_POLICY);
             for (int i = 0; i <
-                    UsersCols_1.length; i++) {
+                    userColsNames.length; i++) {
                 TableColumn<User, Object> col  = new TableColumn<>(UserCols[i]);
-                col.setCellValueFactory(new PropertyValueFactory<>(UsersCols_1[i]));
+                col.setCellValueFactory(new PropertyValueFactory<>(userColsNames[i]));
                 tableUsersView.getColumns().add(col);
             }
         } catch (Exception e) {
@@ -170,12 +206,11 @@ public class adminController implements Initializable {
     }
 
     public void startTableWorkers(){
-        tableWorkersView.getColumns().removeAll(tableWorkerList);
         SQLHelper sqlHelper = new SQLHelper();
         tableWorkerList = FXCollections.observableArrayList(tableViewHelper.getWorkersAsList());
         try {
             sqlHelper.Init();
-            ResultSet rs = sqlHelper.getUsers();
+            ResultSet rs = sqlHelper.getWorkers();
             WorkerCols = new String[rs.getMetaData().getColumnCount()];
             for( int i=1; i <= rs.getMetaData().getColumnCount(); i++ ){
                 WorkerCols[i-1] = rs.getMetaData().getColumnName(i);
@@ -185,8 +220,58 @@ public class adminController implements Initializable {
                     TableView.CONSTRAINED_RESIZE_POLICY);
             for ( int i = 0; i < WorkerCols.length; i++ ) {
                 TableColumn<Worker, Object> col  = new TableColumn<>(WorkerCols[i]);
-                col.setCellValueFactory(new PropertyValueFactory<>(WorkerCols[i]));
+                col.setCellValueFactory(new PropertyValueFactory<>(workerColsNames[i]));
                 tableWorkersView.getColumns().add(col);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            sqlHelper.die();
+        }
+    }
+
+    public void startPatientsTable(){
+        SQLHelper sqlHelper = new SQLHelper();
+        tablePatientList = FXCollections.observableArrayList(tableViewHelper.getPatientsAsList());
+        try {
+            sqlHelper.Init();
+            ResultSet rs = sqlHelper.getPatients();
+            PatientsCols = new String[rs.getMetaData().getColumnCount()];
+            for( int i=1; i <= rs.getMetaData().getColumnCount(); i++ ){
+                PatientsCols[i-1] = rs.getMetaData().getColumnName(i);
+            }
+            tablePatientsView.setItems(tablePatientList);
+            tablePatientsView.setColumnResizePolicy(
+                    TableView.CONSTRAINED_RESIZE_POLICY);
+            for ( int i = 0; i < PatientsCols.length; i++ ) {
+                TableColumn<Patient, Object> col  = new TableColumn<>(PatientsCols[i]);
+                col.setCellValueFactory(new PropertyValueFactory<>(patientColsNames[i]));
+                tablePatientsView.getColumns().add(col);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            sqlHelper.die();
+        }
+    }
+
+    public void startVisitsTable(){
+        SQLHelper sqlHelper = new SQLHelper();
+        tableVisitsList = FXCollections.observableArrayList(tableViewHelper.getVisitsAsList());
+        try {
+            sqlHelper.Init();
+            ResultSet rs = sqlHelper.getVisits();
+            VisitsCols = new String[rs.getMetaData().getColumnCount()];
+            for( int i=1; i <= rs.getMetaData().getColumnCount(); i++ ){
+                VisitsCols[i-1] = rs.getMetaData().getColumnName(i);
+            }
+            tableVisitsView.setItems(tableVisitsList);
+            tableVisitsView.setColumnResizePolicy(
+                    TableView.CONSTRAINED_RESIZE_POLICY);
+            for ( int i = 0; i < VisitsCols.length; i++ ) {
+                TableColumn<Vists, Object> col  = new TableColumn<>(VisitsCols[i]);
+                col.setCellValueFactory(new PropertyValueFactory<>(VisitsCols[i]));
+                tableVisitsView.getColumns().add(col);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -208,6 +293,7 @@ public class adminController implements Initializable {
         tableWorkersView.setVisible(true);
         tablePatientsView.setVisible(false);
         tableVisitsView.setVisible(false);
+        reloadWorkersTable();
     }
 
     public void setTablePatients(){
@@ -215,6 +301,7 @@ public class adminController implements Initializable {
         tableWorkersView.setVisible(false);
         tablePatientsView.setVisible(true);
         tableVisitsView.setVisible(false);
+        reloadPatientsTable();
     }
 
     public void setTableVisits(){
@@ -222,6 +309,14 @@ public class adminController implements Initializable {
         tableWorkersView.setVisible(false);
         tablePatientsView.setVisible(false);
         tableVisitsView.setVisible(true);
+        reloadVisitsTable();
+    }
+
+    public void reloadTables(){
+        reloadUsersTable();
+        reloadWorkersTable();
+        reloadPatientsTable();
+        reloadVisitsTable();
     }
 
 }

@@ -2,16 +2,11 @@ package sample;
 
 import javafx.scene.control.Alert;
 
+import java.sql.*;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 public class SQLHelper{
 
@@ -145,6 +140,29 @@ public class SQLHelper{
 
 	}
 
+
+
+	public Worker getWorkerProp(ResultSet rs) throws SQLException {
+		dbSchema db = new dbSchema();
+		return new Worker(
+				rs.getInt(	    db.Tab2.get(0) ),
+				rs.getDouble(	db.Tab2.get(1) ),
+				rs.getString(   db.Tab2.get(2) ),
+				rs.getString(	db.Tab2.get(3) )
+		);
+	}
+
+	public Worker getWorkerPropId(int ID) throws SQLException {
+		dbSchema db = new dbSchema();
+		ResultSet rs = findWorkerById(ID);
+		return new Worker(
+				rs.getInt(	    db.Tab2.get(0) ),
+				rs.getDouble(	db.Tab2.get(1) ),
+				rs.getString(   db.Tab2.get(2) ),
+				rs.getString(	db.Tab2.get(3) )
+		);
+	}
+
 	public Patient getPatientProp(ResultSet rs) throws SQLException {
 		dbSchema db = new dbSchema();
 		return new Patient(
@@ -170,37 +188,16 @@ public class SQLHelper{
 		);
 	}
 
-	public Worker getWorkerProp(ResultSet rs) throws SQLException {
-		dbSchema db = new dbSchema();
-		return new Worker(
-				rs.getInt(	    db.Tab2.get(0) ),
-				rs.getDouble(	db.Tab2.get(1) ),
-				rs.getString(   db.Tab2.get(2) ),
-				rs.getString(	db.Tab2.get(3) )
-		);
-	}
-
-	public Worker getWorkerPropId(int ID) throws SQLException {
-		dbSchema db = new dbSchema();
-		ResultSet rs = findWorkerById(ID);
-		return new Worker(
-				rs.getInt(	    db.Tab2.get(0) ),
-				rs.getDouble(	db.Tab2.get(1) ),
-				rs.getString(   db.Tab2.get(2) ),
-				rs.getString(	db.Tab2.get(3) )
-		);
-	}
-
 	public Vists getVisitsProp(ResultSet rs) throws SQLException {
 		dbSchema db = new dbSchema();
 		return new Vists(
-				rs.getInt(	    db.Tab2.get(0) ),
-				rs.getInt(  	db.Tab2.get(1) ),
-				rs.getString(   db.Tab2.get(2) ),
-				rs.getString(	db.Tab2.get(3) ),
-				rs.getString(	db.Tab2.get(4) ),
-				rs.getString(	db.Tab2.get(5) ),
-				rs.getDouble(	db.Tab2.get(6) )
+				rs.getInt(	    db.Tab4.get(0) ),
+				rs.getInt(  	db.Tab4.get(1) ),
+				rs.getString(   db.Tab4.get(2) ),
+				rs.getString(	db.Tab4.get(3) ),
+				Instant.ofEpochMilli(rs.getDate( db.Tab4.get(4) ).getTime()).atZone(ZoneId.systemDefault()).toLocalDate(),
+				rs.getString(	db.Tab4.get(5) ),
+				rs.getDouble(	db.Tab4.get(6) )
 		);
 	}
 
@@ -208,13 +205,13 @@ public class SQLHelper{
 		dbSchema db = new dbSchema();
 		ResultSet rs = findVisitsUsingId(ID);
 		return new Vists(
-				rs.getInt(	    db.Tab2.get(0) ),
-				rs.getInt(  	db.Tab2.get(1) ),
-				rs.getString(   db.Tab2.get(2) ),
-				rs.getString(	db.Tab2.get(3) ),
-				rs.getString(	db.Tab2.get(4) ),
-				rs.getString(	db.Tab2.get(5) ),
-				rs.getDouble(	db.Tab2.get(6) )
+				rs.getInt(	    db.Tab4.get(0) ),
+				rs.getInt(  	db.Tab4.get(1) ),
+				rs.getString(   db.Tab4.get(2) ),
+				rs.getString(	db.Tab4.get(3) ),
+				Instant.ofEpochMilli(rs.getDate( db.Tab4.get(4) ).getTime()).atZone(ZoneId.systemDefault()).toLocalDate(),
+				rs.getString(	db.Tab4.get(5) ),
+				rs.getDouble(	db.Tab4.get(6) )
 		);
 	}
 
@@ -222,13 +219,13 @@ public class SQLHelper{
 		dbSchema db = new dbSchema();
 		ResultSet rs = findVisitsUsingPatientId(ID);
 		return new Vists(
-				rs.getInt(	    db.Tab2.get(0) ),
-				rs.getInt(  	db.Tab2.get(1) ),
-				rs.getString(   db.Tab2.get(2) ),
-				rs.getString(	db.Tab2.get(3) ),
-				rs.getString(	db.Tab2.get(4) ),
-				rs.getString(	db.Tab2.get(5) ),
-				rs.getDouble(	db.Tab2.get(6) )
+				rs.getInt(	    db.Tab4.get(0) ),
+				rs.getInt(  	db.Tab4.get(1) ),
+				rs.getString(   db.Tab4.get(2) ),
+				rs.getString(	db.Tab4.get(3) ),
+				Instant.ofEpochMilli(rs.getDate( db.Tab4.get(4) ).getTime()).atZone(ZoneId.systemDefault()).toLocalDate(),
+				rs.getString(	db.Tab4.get(5) ),
+				rs.getDouble(	db.Tab4.get(6) )
 		);
 	}
 	// Get Users
@@ -546,21 +543,20 @@ public class SQLHelper{
 		return true;
 	}
 
-	public boolean InsertIntoVISTS( int VISITID, int PatientID,String PURPOSE,String VISITTYPE, String VISIT_TIME, String EXTRA, double COST ) {
+	public boolean InsertIntoVISTS( int VISITID, int PatientID,String PURPOSE,String VISITTYPE, String EXTRA, double COST ) {
 		// IF the inputed values are not NULL then swrround them with quotes to insert them in the database
 		if( !PURPOSE.equals("NULL") )
 			PURPOSE = "'" + PURPOSE + "'";
 		if( !VISITTYPE.equals("NULL") )
 			VISITTYPE = "'" + VISITTYPE + "'";
-		if( !VISIT_TIME.equals("NULL") )
-			VISIT_TIME = "'" + VISIT_TIME + "'";
 		if( !EXTRA.equals("NULL") )
 			EXTRA = "'" + EXTRA + "'";
 
 			// Our SQL Query
 			String SQL =
 			"INSERT INTO " + dbSchema.TABLE4_NAME +
-		" VALUES(" + VISITID + ", " + PatientID + ", " + PURPOSE + ", " + VISITTYPE + ", " + VISIT_TIME + ", " + EXTRA + ", " + COST + ")";
+		" VALUES(" + VISITID + ", " + PatientID + ", " + PURPOSE + ", " + VISITTYPE + ", " + new Date(System.currentTimeMillis())
+					+ ", " + EXTRA + ", " + COST + ")";
 			// Catch any errors
 		try{
 			// Run the SQL Command
@@ -571,6 +567,28 @@ public class SQLHelper{
 			return false;
 		}
 		return true;
+	}
+
+	public boolean updatePatient( int PATIENTSID, String NOTES , String KNOWN_DISEASES, String PRESCRIPTION, String Question, String COMPLAINS) throws SQLException {
+		dbSchema db = new dbSchema();
+		// Make sure our strings are between ' '
+		if( !NOTES.equals("NULL") )
+			NOTES = "'" + NOTES + "'";
+		if( !KNOWN_DISEASES.equals("NULL") )
+			KNOWN_DISEASES = "'" + KNOWN_DISEASES + "'";
+		if( !PRESCRIPTION.equals("NULL") )
+			PRESCRIPTION = "'" + PRESCRIPTION + "'";
+		if( !Question.equals("NULL") )
+			Question = "'" + Question + "'";
+		if( !COMPLAINS.equals("NULL") )
+			COMPLAINS = "'" + COMPLAINS + "'";
+
+		return statement.execute(
+					"UPDATE " + dbSchema.TABLE3_NAME +
+					" SET " + db.Tab3.get(1) + "= " + NOTES + "," + db.Tab3.get(2) + "= " + KNOWN_DISEASES +"," + db.Tab3.get(3) + "= " + PRESCRIPTION +
+					"," + db.Tab3.get(4) + "= " + Question + "," + db.Tab3.get(5) + "= " + COMPLAINS +
+					"WHERE " + db.Tab3.get(0) + "= " + PATIENTSID
+			);
 	}
 
 	// Such a long method name ugh but its better than unreadable code amiright.jpg

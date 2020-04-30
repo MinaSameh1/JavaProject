@@ -2,6 +2,8 @@ package sample;
 
 import javafx.beans.property.*;
 
+import java.time.LocalDate;
+
 // ADD VISIT TIME
 public class Vists {
 
@@ -10,16 +12,18 @@ public class Vists {
     private final StringProperty EXTRA;
     private final StringProperty PURPOSE ;
     private final StringProperty VISITTYPE;
-    private final StringProperty VISITTIME;
+
+
+    private final ObjectProperty<LocalDate> VISITTIME;
     private final DoubleProperty COST;
 
-    public Vists(int VISITID , int PatientID,String PURPOSE, String VISITTYPE, String VISITTIME, String EXTRA,double COST) {
+    public Vists(int VISITID , int PatientID,String PURPOSE, String VISITTYPE, LocalDate VISITTIME, String EXTRA,double COST) {
         this.VISITID = new SimpleIntegerProperty(VISITID );
         this.PatientID = new SimpleIntegerProperty(PatientID);
         this.PURPOSE  = new SimpleStringProperty(PURPOSE);
         this.EXTRA = new SimpleStringProperty(EXTRA);
         this.VISITTYPE = new SimpleStringProperty(VISITTYPE);
-        this.VISITTIME = new SimpleStringProperty(VISITTIME);
+        this.VISITTIME = new SimpleObjectProperty<LocalDate>(VISITTIME);
         this.COST = new SimpleDoubleProperty(COST);
     }
 
@@ -82,6 +86,26 @@ public class Vists {
     public IntegerProperty PatientIDProperty() {
         return PatientID;
     }
+
+    public IntegerProperty patientIDProperty() {
+        return PatientID;
+    }
+
+    public StringProperty VISITTYPEProperty() {
+        return VISITTYPE;
+    }
+
+    public LocalDate getVISITTIME() {
+        return VISITTIME.get();
+    }
+
+    public ObjectProperty<LocalDate> VISITTIMEProperty() {
+        return VISITTIME;
+    }
+
+    public void setVISITTIME(LocalDate VISITTIME) { this.VISITTIME.set(VISITTIME); }
+
+    public void setCOST(double COST) { this.COST.set(COST); }
 
     public double getCOST() {
         return COST.get();

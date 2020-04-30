@@ -57,7 +57,7 @@ public class TableViewHelper {
         try {
             List<Worker> list = new ArrayList<>();
             helper.Init();
-            ResultSet rs = helper.getUsers();
+            ResultSet rs = helper.getWorkers();
             while (rs.next()) {
                 Worker worker = helper.getWorkerProp(rs);
                 list.add(worker);
@@ -72,7 +72,7 @@ public class TableViewHelper {
         }
     }
 
-    public List<Worker> getWorkerssAsListById(int id) {
+    public List<Worker> getWorkersAsListById(int id) {
         SQLHelper helper = new SQLHelper();
         try {
             List<Worker> list = new ArrayList<>();
@@ -92,15 +92,15 @@ public class TableViewHelper {
         }
     }
 
-    public List<User> getPatientsAsList() {
+    public List<Patient> getPatientsAsList() {
         SQLHelper helper = new SQLHelper();
         try {
-            List<User> list = new ArrayList<>();
+            List<Patient> list = new ArrayList<>();
             helper.Init();
             ResultSet rs = helper.getPatients();
             while (rs.next()) {
-                User user = helper.getUserProp(rs);
-                list.add(user);
+                Patient patient = helper.getPatientProp(rs);
+                list.add(patient);
             }
             return list;
         } catch (Exception e) {
@@ -111,6 +111,27 @@ public class TableViewHelper {
             helper.die();
         }
     }
+
+    public List<Vists> getVisitsAsList() {
+        SQLHelper helper = new SQLHelper();
+        try {
+            List<Vists> list = new ArrayList<>();
+            helper.Init();
+            ResultSet rs = helper.getVisits();
+            while (rs.next()) {
+                Vists vists = helper.getVisitsProp(rs);
+                list.add(vists);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("ERROR " + e.getMessage());
+            return null;
+        } finally {
+            helper.die();
+        }
+    }
+
     // This is hardcoded for now sadly, the problem is with my User class, its not a problem that needs to refactor the code tho....
     private String[] cols = {
             "Id",

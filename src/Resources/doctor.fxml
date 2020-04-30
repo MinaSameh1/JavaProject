@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="939.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.doctorController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#exitProgram" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <BorderPane style="-fx-background-color: #038afc;" BorderPane.alignment="CENTER">
+         <center>
+            <GridPane prefHeight="256.0" prefWidth="939.0" style="-fx-background-color: 00a5e0;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TableView fx:id="tablePatientsView" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #A0a5e0;" />
+                  <TableView fx:id="tableVisitsView" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #00a5e0;" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+         </center>
+         <top>
+            <Pane prefHeight="323.0" prefWidth="939.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="prescriptionText" layoutX="193.0" layoutY="85.0" />
+                  <Label layoutX="26.0" layoutY="88.0" text="Prescription" textFill="#33fff0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="26.0" layoutY="23.0" text="Patient ID:" textFill="#33fff0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="patientIDlabel" layoutX="139.0" layoutY="23.0" text="0" textFill="#33fff0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="knownDisease" layoutX="193.0" layoutY="49.0" />
+                  <Label layoutX="26.0" layoutY="52.0" text="Known Disease:" textFill="#33fff0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="26.0" layoutY="123.0" text="Patient's Question:" textFill="#33fff0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="27.0" layoutY="187.0" text="Complains about:" textFill="#33fff0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="495.0" layoutY="27.0" text="Visit ID:" textFill="#33fff0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="592.0" layoutY="27.0" text="0" textFill="#33fff0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="495.0" layoutY="57.0" text="Patient ID:" textFill="#33fff0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="592.0" layoutY="57.0" text="0" textFill="#33fff0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="495.0" layoutY="87.0" text="Purpose of Visit:" textFill="#33fff0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="496.0" layoutY="120.0" text="Visit Type:" textFill="#33fff0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="500.0" layoutY="152.0" text="Extra" textFill="#33fff0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="656.0" layoutY="87.0" text="visit" textFill="#33fff0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="656.0" layoutY="120.0" text="visit" textFill="#33fff0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="656.0" layoutY="153.0" text="visit" textFill="#33fff0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="26.0" layoutY="152.0" text="Answer:" textFill="#33fff0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="questionText" layoutX="194.0" layoutY="122.0" prefHeight="57.0" prefWidth="170.0" />
+                  <Button layoutX="123.0" layoutY="273.0" mnemonicParsing="false" onAction="#updatePatient" text="Update Patient's Record">
+                     <font>
+                        <Font name="Inconsolata Regular" size="14.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="complainsLabel" layoutX="193.0" layoutY="187.0" text="label" textFill="#33fff0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="notesText" layoutX="194.0" layoutY="220.0" />
+                  <Label layoutX="32.0" layoutY="224.0" text="Notes:" textFill="#33fff0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </top>
+      </BorderPane>
+   </center>
+</BorderPane>

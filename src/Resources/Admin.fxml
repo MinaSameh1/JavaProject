@@ -167,7 +167,7 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="694.0" layoutY="1.0" mnemonicParsing="false" onAction="#searchTable" prefHeight="41.0" prefWidth="170.0" style="-fx-background-color: #03bafc;" text="Reload DataBase">
+            <Button layoutX="694.0" layoutY="1.0" mnemonicParsing="false" onAction="#reloadTables" prefHeight="41.0" prefWidth="203.0" style="-fx-background-color: #03bafc;" text="Reload DataBase">
                <font>
                   <Font size="20.0" />
                </font>

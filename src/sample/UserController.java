@@ -94,11 +94,13 @@ public class UserController implements Initializable {
             // Make sure we don't have any spaces
             UserNameText.setText(UserNameText.getText().replaceAll("\\s+", ""));
             PasswordText.setText(PasswordText.getText().replaceAll("\\s+", ""));
+            // check if the required fields are entered
             if (
                     FirstNameText.getText().isEmpty() || LastNameText.getText().isEmpty() || EmailText.getText().isEmpty() ||
                             PasswordText.getText().isEmpty() || ConfirmPassText.getText().isEmpty() || UserNameText.getText().isEmpty() ||
                             AgeText.getText().isEmpty() || DOB.getValue().equals(null) || Gender == 'e'
             ) {
+                // if not then stop the registration and tell the user to fill the required fields
                 new Alert(Alert.AlertType.ERROR, "Please Check you have filled the required* Fields").showAndWait();
                 return;
             }
@@ -191,9 +193,10 @@ public class UserController implements Initializable {
             // SUCCESS TELL THE USER
             new Alert(Alert.AlertType.INFORMATION, "Registration Successful, Will open login page now").showAndWait();
 
-            // Exit Registration form and show the login form
-            Main.MainProgram.closeReg();
-            Main.MainProgram.showLogin();
+            // Exit addnew
+            Main.MainProgram.closeAddNew();
+            Main.MainProgram.closeAdmin();
+            Main.MainProgram.startAdmin();
         } catch (Exception e) {
             // if something wrong happens show error
             new Alert(Alert.AlertType.ERROR, "Error! " + e.getMessage()).showAndWait();

@@ -1,11 +1,13 @@
 package sample;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,9 +21,12 @@ public class MainController {
     public Stage Login;
     // Registration Page
     public Stage Reg = null;
-
+    // Admin page
     public Stage admin = null;
+    // add new page
+    public Stage addNew = null;
 
+    // empty constructor so if it gets called don't do anything *yet*
     public MainController(){ }
 
     // Close the program and all stages
@@ -119,12 +124,31 @@ public class MainController {
         return true;
     }
 
-    public void showAdmin(){
-        if( admin == null){
-            System.err.println("ERROR admin is null start it up first!");
-            return;
+    public boolean startAddNew(){
+        // if the Stage is already open, show it don't start
+        if( addNew != null){
+            Main.MainProgram.showAddNew();
+            return true;
         }
-        admin.show();
+        try {
+            BorderPane pane = FXMLLoader.load(getClass().getResource("../Resources/AddNew.fxml"));
+            addNew = new Stage();
+            addNew.setTitle("Clinic Manager add New User");
+            addNew.setScene(new Scene(pane));
+            // TODO: If it is closed, then reopen login in case it falls but i havn't got a good way of doing this yet so :dunno:
+            /*addNew.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent windowEvent) {
+
+                }
+            });*/
+            addNew.show();
+        } catch ( Exception e){
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "ERROR in " + e.getMessage()).showAndWait();
+            return false;
+        }
+        return true;
     }
 
 
@@ -138,6 +162,22 @@ public class MainController {
             return;
         }
         Reg.show();
+    }
+
+    public void showAdmin(){
+        if( admin == null){
+            System.err.println("ERROR admin is null start it up first!");
+            return;
+        }
+        admin.show();
+    }
+
+    public void showAddNew(){
+        if( addNew == null){
+            System.err.println("ERROR addNew is null start it up first!");
+            return;
+        }
+        addNew.show();
     }
 
     public void hideReg(){
@@ -156,6 +196,9 @@ public class MainController {
     }
     public void closeAdmin(){
         admin.close();
+    }
+    public void closeAddNew(){
+        addNew.close();
     }
 
     public void showAbout(){

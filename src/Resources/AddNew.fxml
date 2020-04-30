@@ -171,7 +171,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <ComboBox fx:id="userTypeCombo" layoutX="127.0" layoutY="386.0" prefWidth="150.0" />
+            <ComboBox fx:id="userTypeCombo" layoutX="127.0" layoutY="386.0" prefWidth="150.0" promptText="UserType" />
             <Label layoutX="31.0" layoutY="390.0" text="UserType" textFill="#33fff0">
                <font>
                   <Font name="System Bold" size="15.0" />

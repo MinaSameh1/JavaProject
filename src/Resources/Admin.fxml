@@ -12,6 +12,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -38,7 +39,7 @@
                   </Label>
                </children>
             </Pane>
-            <Button graphicTextGap="6.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Users" textAlignment="CENTER" textFill="WHITE">
+            <Button graphicTextGap="6.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setTableUsers" prefHeight="83.0" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Users" textAlignment="CENTER">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -56,7 +57,7 @@
                   <Insets left="5.0" />
                </padding>
             </Button>
-            <Button graphicTextGap="6.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Doctors and Workers" textAlignment="CENTER">
+            <Button graphicTextGap="6.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setTableWorkers" prefHeight="77.0" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Doctors and Workers" textAlignment="CENTER">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -71,7 +72,7 @@
                   <Font name="Inconsolata Regular" size="16.0" />
                </font>
             </Button>
-            <Button graphicTextGap="6.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Patients" textAlignment="CENTER">
+            <Button graphicTextGap="6.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setTablePatients" prefHeight="69.0" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Patients" textAlignment="CENTER">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -83,7 +84,7 @@
                   <Font name="Inconsolata Regular" size="16.0" />
                </font>
             </Button>
-            <Button graphicTextGap="6.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Visits" textAlignment="CENTER">
+            <Button graphicTextGap="6.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setTableVisits" prefHeight="76.0" prefWidth="208.0" style="-fx-background-color: #03bafc;" text="Visits" textAlignment="CENTER">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -101,9 +102,6 @@
          </BorderPane.margin>
       </VBox>
    </left>
-   <center>
-      <TableView fx:id="tabView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </center>
    <top>
       <MenuBar style="-fx-background-color: #00a5e0;" BorderPane.alignment="CENTER">
         <menus>
@@ -169,7 +167,22 @@
                   <Font size="20.0" />
                </font>
             </Button>
+            <Button layoutX="694.0" layoutY="1.0" mnemonicParsing="false" onAction="#searchTable" prefHeight="41.0" prefWidth="170.0" style="-fx-background-color: #03bafc;" text="Reload DataBase">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </bottom>
+   <center>
+      <StackPane fx:id="MainStack" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="tableUsersView" prefHeight="749.0" prefWidth="1088.0" />
+            <TableView fx:id="tablePatientsView" prefHeight="737.0" prefWidth="1084.0" />
+            <TableView fx:id="tableWorkersView" prefHeight="741.0" prefWidth="1088.0" />
+            <TableView fx:id="tableVisitsView" prefHeight="750.0" prefWidth="1087.0" />
+         </children>
+      </StackPane>
+   </center>
 </BorderPane>

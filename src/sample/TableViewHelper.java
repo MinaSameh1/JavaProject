@@ -52,6 +52,46 @@ public class TableViewHelper {
         }
     }
 
+    public List<Worker> getWorkersAsList() {
+        SQLHelper helper = new SQLHelper();
+        try {
+            List<Worker> list = new ArrayList<>();
+            helper.Init();
+            ResultSet rs = helper.getUsers();
+            while (rs.next()) {
+                Worker worker = helper.getWorkerProp(rs);
+                list.add(worker);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("ERROR " + e.getMessage());
+            return null;
+        } finally {
+            helper.die();
+        }
+    }
+
+    public List<Worker> getWorkerssAsListById(int id) {
+        SQLHelper helper = new SQLHelper();
+        try {
+            List<Worker> list = new ArrayList<>();
+            helper.Init();
+            ResultSet rs = helper.findWorkerById(id);
+            while (rs.next()) {
+                Worker user = helper.getWorkerProp(rs);
+                list.add(user);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("ERROR " + e.getMessage());
+            return null;
+        } finally {
+            helper.die();
+        }
+    }
+
     public List<User> getPatientsAsList() {
         SQLHelper helper = new SQLHelper();
         try {
@@ -122,4 +162,6 @@ public class TableViewHelper {
         }
         return null;
     }
+
+
 }

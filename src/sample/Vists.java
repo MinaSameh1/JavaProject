@@ -2,6 +2,7 @@ package sample;
 
 import javafx.beans.property.*;
 
+// ADD VISIT TIME
 public class Vists {
 
     private final IntegerProperty VISITID;

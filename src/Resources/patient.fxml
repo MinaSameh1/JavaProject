@@ -98,7 +98,7 @@
                         <Font name="Inconsolata Regular" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="dobLabel" layoutX="132.0" layoutY="172.0" text="email">
+                  <Label fx:id="dobLabel" layoutX="132.0" layoutY="172.0">
                      <font>
                         <Font name="Inconsolata Regular" size="16.0" />
                      </font>
@@ -143,22 +143,22 @@
                         <Font name="Inconsolata Regular" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="AddressLabel1" layoutX="599.0" layoutY="125.0" text="Blood Type">
+                  <Label layoutX="599.0" layoutY="125.0" text="Blood Type">
                      <font>
                         <Font name="Inconsolata Regular" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="bloodLabel" layoutX="701.0" layoutY="125.0" text="bd">
+                  <Label fx:id="bloodLabel" layoutX="701.0" layoutY="125.0">
                      <font>
                         <Font name="Inconsolata Regular" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="AddressLabel11" layoutX="598.0" layoutY="154.0" text="UserType:">
+                  <Label layoutX="598.0" layoutY="154.0" text="UserType:">
                      <font>
                         <Font name="Inconsolata Regular" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="UTLabel" layoutX="700.0" layoutY="154.0" text="bd">
+                  <Label fx:id="UTLabel" layoutX="700.0" layoutY="154.0">
                      <font>
                         <Font name="Inconsolata Regular" size="16.0" />
                      </font>

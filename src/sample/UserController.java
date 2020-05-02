@@ -166,15 +166,13 @@ public class UserController implements Initializable {
                 }
             });
 
-            int UserType = userTypeCombo.getSelectionModel().getSelectedIndex();
-
             // Insert the user data into the users and patients
             Helper.InsertIntoUsers(
                     ID, UserNameText.getText(), FirstNameText.getText(), LastNameText.getText(), PasswordText.getText(), EmailText.getText(),
                     DOB.getValue().toString(), Integer.valueOf(AgeText.getText()), "0" + TelephoneText.getText(), "0" + AltPhoneText.getText(), AddressText.getText(),
-                    BloodTypeBox.getValue().toString(), UserType, Gender
+                    BloodTypeBox.getValue().toString(), userTypeCombo.getSelectionModel().getSelectedIndex(), Gender
             );
-            switch (UserType){
+            switch (userTypeCombo.getSelectionModel().getSelectedIndex()){
                 case 0:
                     Helper.InsertIntoWORKERS(ID, 0, "NULL", "NULL");
                     break;
@@ -182,8 +180,10 @@ public class UserController implements Initializable {
                     Helper.InsertIntoWORKERS(ID, 0, "NULL", "NULL");
                     break;
                 case 2:
+                    Helper.InsertIntoWORKERS(ID, 0, "NULL", "NULL");
                     break;
                 case 3:
+                    Helper.InsertIntoWORKERS(ID, 0, "NULL", "NULL");
                     break;
                 case 4:
                     Helper.InsertIntoPATIENTS(ID, "NULL", "NULL", "NULL", "NULL", "NULL");

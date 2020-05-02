@@ -2,8 +2,6 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
-
 
 public class LoginController {
     @FXML
@@ -14,9 +12,6 @@ public class LoginController {
     private PasswordField Password;
     @FXML
     public Label labelWelcome;
-    @FXML
-    private MenuItem LogMenuClose;
-    private Stage stage;
 
     // our event to handle login button click
     public void handleLog() throws Exception {
@@ -62,12 +57,12 @@ public class LoginController {
               Password.clear();
             }
             else {
-                System.out.println("FAILED WRONG PASS OR NAME" + UserName.getText() + "  " + Password.getText() );
+                //System.out.println("FAILED WRONG PASS OR NAME" + UserName.getText() + "  " + Password.getText() );
                 labelWelcome.setText("Wrong Username or password!");
             }
         } catch ( Exception e ){
             e.printStackTrace();
-            System.out.println("FAILED " + e);
+            System.out.println("FAILED " + e.getMessage());
         }
         finally{
             helper.die();
@@ -77,7 +72,7 @@ public class LoginController {
     // Open Register Stage
     public void openRegister(){
         try {
-            if(Main.MainProgram.startReg() )
+            if( Main.MainProgram.startReg() )
                 Main.MainProgram.hideLogin();
             else {
                 System.err.println("FAILLLED to Open registration form!");

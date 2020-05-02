@@ -11,7 +11,6 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    public Stage stage;
     // The main controller we will use to control our Stages
     public static MainController MainProgram = new MainController();
 
@@ -32,7 +31,6 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
     // main
-    public static void main(String[] args) { launch(args); }
+    public static void main(String[] args){ launch(args); }
 }

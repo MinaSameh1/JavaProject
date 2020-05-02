@@ -201,7 +201,7 @@ public class TableViewHelper {
         try {
             sqlHelper.Init();
             ResultSet rs = sqlHelper.getUsers();
-            UserCols = new String[rs.getMetaData().getColumnCount()];
+            UserCols = new String[ rs.getMetaData().getColumnCount() ];
             for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                 UserCols[i - 1] = rs.getMetaData().getColumnName(i);
             }

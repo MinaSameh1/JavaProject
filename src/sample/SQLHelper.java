@@ -21,24 +21,23 @@ public class SQLHelper{
 	 * @throws Exception if failed to connect warn the user/programmer
 	 */
 	// WAKE UP DATABASE STOP SLEEPING
-	public void Init() throws Exception{
-	try {
-		// Make sure we have the driver
-		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	public void Init() throws Exception {
+		try {
+			// Make sure we have the driver
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			// Connect to the server
+			// our Connection url, that will be used to connect to the DB
+			String connectionUrl = "jdbc:sqlserver://localhost:1433" +
+					";databaseName=" + dbSchema.DB_NAME +
+					";user=" + dbSchema.USER +
+					";password=" + dbSchema.PASSWORD + ";";
+			con = DriverManager.getConnection(connectionUrl);
 
-		// Connect to the server
-		// our Connection url, that will be used to connect to the DB
-		String connectionUrl = "jdbc:sqlserver://localhost:1433" +
-				";databaseName=" + dbSchema.DB_NAME +
-				";user=" + dbSchema.USER +
-				";password=" + dbSchema.PASSWORD + ";";
-		con = DriverManager.getConnection(connectionUrl);
-	
-		statement = con.createStatement();
-	} catch ( Exception e ) {
-		// even my programs throw stuff at me, sad
-		throw e;
-	}
+			statement = con.createStatement();
+		} catch ( Exception e ) {
+			// even my programs throw stuff at me, sad
+			throw e;
+		}
 	}
 
 	// Close the connection and everything

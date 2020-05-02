@@ -109,7 +109,6 @@ public class RegisterController implements Initializable {
             System.err.println(e.getMessage());
         }
 
-        SQLHelper Helper = new SQLHelper();
             if( UserNameText.getText().length() < 4 || UserNameText.getText().length() > 16 ){
                 new Alert(Alert.AlertType.ERROR, "Please check that username is atleast 4 charecters long and at most 16 charecters ").showAndWait();
                 return;
@@ -119,7 +118,9 @@ public class RegisterController implements Initializable {
             return;
             }
             if( Integer.valueOf(AgeText.getText()) < 0 || Integer.valueOf(AgeText.getText()) > 105 )
-            if( PasswordText.getText().length() < 4 || PasswordText.getText().length() > 16 ){
+                new Alert(Alert.AlertType.ERROR, "Please check your Age").showAndWait();
+
+        if( PasswordText.getText().length() < 4 || PasswordText.getText().length() > 16 ){
                 new Alert(Alert.AlertType.ERROR, "Please check that password is atleast 4 charecters long and at most 16 charecters ").showAndWait();
                 return;
             }
@@ -127,7 +128,8 @@ public class RegisterController implements Initializable {
                 new Alert(Alert.AlertType.ERROR, "Please check that password is equal to confirmed password!").showAndWait();
                 return;
             }
-            // This should return true if another user exists, if so prompt the user that name is already in use
+        SQLHelper Helper = new SQLHelper();
+
         try {
             // open connection to DB
             Helper.Init();
